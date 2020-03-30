@@ -1,19 +1,16 @@
 ---
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Snyk resources required to provision into your account
+Description: Snyk integration for Amazon Elastic Container Registry (ECR)
 Outputs:
   AWSRegion:
-    Description: The AWS region for your Snyk intgration
-    Value: !Sub ${AWS::Region}
+    Description: The AWS region for your Snyk ECR intgration
+    Value: !Sub '${AWS::Region}'
   SnykECRIntegrationRole:
     Description: Snyk ECR Integration Role ARN
-    Value: !GetAtt SnykECRIntegrationRole.Arn
-  SnykLambdaIntegrationRole:
-    Description: Snyk Lambda Integration Role ARN
-    Value: !GetAtt SnykLambdaIntegrationRole.Arn
+    Value: !GetAtt 'SnykECRIntegrationRole.Arn'
   Version:
-    Description: Snyk Account Capabilities Version
-    Value: 1.0.1
+    Description: Snyk ECR Integration Version
+    Value: 1.0.2
 Metadata:
   LICENSE: Apache License, Version 2.0
   AWS::CloudFormation::Interface:
@@ -26,12 +23,15 @@ Metadata:
           default: AWS Quick Start configuration
         Parameters:
           - QSS3BucketName
+          - QSS3BucketRegion
           - QSS3KeyPrefix
     ParameterLabels:
       SnykExternalId:
         default: Snyk Organization ID
       QSS3BucketName:
         default: Quick Start S3 bucket name
+      QSS3BucketRegion:
+        default: Quick Start S3 bucket region
       QSS3KeyPrefix:
         default: Quick Start S3 key prefix
 Parameters:
@@ -52,6 +52,10 @@ Parameters:
       numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start
       or end with a hyphen (-).
     Type: String
+  QSS3BucketRegion:
+    Default: us-west-2
+    Description: The AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. When using your own bucket, you must specify this value.
+    Type: String
   QSS3KeyPrefix:
     AllowedPattern: ^[0-9a-zA-Z-/.]*$
     ConstraintDescription:
@@ -65,7 +69,7 @@ Parameters:
     Type: String
 Resources:
   SnykECRIntegrationRole:
-    Type: AWS::IAM::Role
+    Type: 'AWS::IAM::Role'
     Properties:
       AssumeRolePolicyDocument:
         Version: '2012-10-17'
@@ -76,7 +80,7 @@ Resources:
             Action: sts:AssumeRole
             Condition:
               StringEquals:
-                'sts:ExternalId': !Ref SnykExternalId
+                'sts:ExternalId': !Ref 'SnykExternalId'
       Path: /snyk/
       Policies:
         - PolicyName: AmazonEC2ContainerRegistryReadOnlyForSnyk
@@ -97,33 +101,5 @@ Resources:
                     'ecr:BatchCheckLayerAvailability',
                     'ecr:GetRepositoryPolicy',
                     'ecr:GetLifecyclePolicy'
-                  ]
-                Resource: '*'
-  SnykLambdaIntegrationRole:
-    Type: AWS::IAM::Role
-    Properties:
-      AssumeRolePolicyDocument:
-        Version: '2012-10-17'
-        Statement:
-          - Effect: Allow
-            Principal:
-              AWS: arn:aws:iam::198361731867:root
-            Action: sts:AssumeRole
-            Condition:
-              StringEquals:
-                'sts:ExternalId': !Ref SnykExternalId
-      Path: /snyk/
-      Policies:
-        - PolicyName: SnykReadOnlyForLambda
-          PolicyDocument:
-            Version: '2012-10-17'
-            Statement:
-              - Effect: Allow
-                Action:
-                  [
-                    'lambda:ListFunctions',
-                    'lambda:GetFunction',
-                    'lambda:ListAliases',
-                    'lambda:GetAccountSettings'
                   ]
                 Resource: '*'

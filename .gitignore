@@ -33,3 +33,4 @@ fabric.properties
 # Taskcat
 .taskcat_overrides.yml
 taskcat_outputs/
+.taskcat/
