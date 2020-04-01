@@ -1,0 +1,53 @@
+project:
+  name: quickstart-snyk-security
+  owner: jay@snyk.io
+  regions:
+    - ca-central-1
+    - eu-west-1
+    - eu-west-2
+    - eu-west-3
+    - us-east-1
+    - us-east-2
+    - us-west-1
+    - us-west-2
+  s3_bucket: ''
+  s3_regional_buckets: true
+  template: templates/snyk-full.yaml
+tests:
+  full:
+    parameters:
+      QSS3BucketName: $[taskcat_autobucket]
+      QSS3BucketRegion: $[taskcat_current_region]
+    regions:
+      - ca-central-1
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+    s3_bucket: ''
+    template: templates/snyk-full.yaml
+  ecr:
+    regions:
+      - ca-central-1
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+    template: templates/snyk-ecr.yaml
+  lambda:
+    regions:
+      - ca-central-1
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+    template: templates/snyk-lambda.yaml
