@@ -1,0 +1,34 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "Deploys the snyk-monitor helm chart into an existing kubernetes cluster (qs-)"
+Parameters:
+  HelmLambdaArn:
+    Type: String
+  KubeConfigPath:
+    Type: String
+  KubeConfigKmsContext:
+    Type: String
+    Default: "EKSQuickStart"
+Resources:
+  # Install snyk-monitor helm chart
+  SnykHelmChart:
+    Type: "Custom::Helm"
+    Version: "1.0"
+    Properties:
+      ServiceToken: !Ref HelmLambdaArn
+      KubeConfigPath: !Ref KubeConfigPath
+      KubeConfigKmsContext: !Ref KubeConfigKmsContext
+      RepoUrl: https://snyk.github.io/kubernetes-monitor/
+      Namespace: snyk-monitor
+      Chart: snyk-charts/snyk-monitor
+      Name: snyk-monitor
+      Values:
+        server.persistentVolume.storageClass: "gp2"
+        server.statefulSet.enabled: true
+        server.replicaCount: 2
+        server.service.sessionAffinity: ClientIP
+        alertmanager.persistentVolume.storageClass: "gp2"
+        alertmanager.statefulSet.enabled: true
+        alertmanager.replicaCount: 2
+Outputs:
+  SnykReleaseName:
+    Value: !Ref SnykHelmChart
