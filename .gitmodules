@@ -1,4 +1,0 @@
-[submodule "submodules/quickstart-trek10-serverless-enterprise-cicd"]
-	path = submodules/quickstart-trek10-serverless-enterprise-cicd
-	url = git@github.com:aws-quickstart/quickstart-trek10-serverless-enterprise-cicd.git
-	branch = master
