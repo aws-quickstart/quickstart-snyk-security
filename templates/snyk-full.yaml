@@ -1,6 +1,6 @@
 ---
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Snyk integration for AWS services
+Description: Snyk integration for AWS services (qs-1qm9kh0j6)
 Outputs:
   AWSRegion:
     Description: The AWS region for your Snyk ECR intgration

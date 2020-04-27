@@ -1,6 +1,6 @@
 ---
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Snyk integration for AWS Lambda
+Description: Snyk integration for AWS Lambda (qs-1qm9kh0j6)
 Outputs:
   SnykLambdaIntegrationRole:
     Description: Snyk Lambda Integration Role ARN
