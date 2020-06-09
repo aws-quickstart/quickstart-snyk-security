@@ -11,6 +11,7 @@ to the following AWS services:
 * [Amazon Elastic Container Registry (ECR)](https://aws.amazon.com/ecr/)
 * [AWS Lambda](https://aws.amazon.com/lambda/)
 
+This Quick Start is intended to be used as a submodule for other Snyk Quick Start deployments.
 In order to deploy this Quick Start, you will need a valid Snyk account. You can 
 [sign up for a free account](https://snyk.io/signup/) or subscribe through the 
 [AWS Marketplace](https://aws.amazon.com/marketplace/saas/ordering?productId=36811992-19af-484d-9598-40c2b324a8d6&ref_=saas_pdp_header_continue). It is recommended that you visit the 
