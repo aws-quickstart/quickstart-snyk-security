@@ -14,6 +14,7 @@ Snyk finds and fixes vulnerabilities in applications that use open source, serve
 This Quick Start establishes cross-account access and enables Snyk integrations with AWS Lambda and Amazon Elastic Container Registry.
 
 ![Quick Start Architecture for Snyk full integration](images/quickstart-snyk-security-full.png)
+
 *Figure 1: Quick Start architecture for Snyk full integration*
 
 As shown in Figure 1, the Quick Start for Snyk full integration sets up the following:
@@ -22,6 +23,7 @@ As shown in Figure 1, the Quick Start for Snyk full integration sets up the foll
 
 
 ![Quick Start Architecture for Snyk full integration](images/quickstart-snyk-security-lambda.png)
+
 *Figure 2: Quick Start architecture for Snyk integration with AWS Lambda*
 
 As shown in Figure 2, the Quick Start for Snyk integration with AWS Lambda sets up the following:
@@ -29,6 +31,7 @@ As shown in Figure 2, the Quick Start for Snyk integration with AWS Lambda sets 
 
 
 ![Quick Start Architecture for Snyk full integration](images/quickstart-snyk-security-ecr.png)
+
 *Figure 3: Quick Start architecture for Snyk integration with Amazon Elastic Container Registry*
 
 As shown in Figure 3, the Quick Start for Snyk integration with Amazon Elastic Container Registry sets up the following:
