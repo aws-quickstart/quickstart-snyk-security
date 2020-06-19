@@ -1,6 +1,6 @@
 # Snyk: Developer-First Security on the AWS Cloud
 
-**NOTE** - This Quick Start is intended to be used as a submodule for Snyk integration in other Quick Start deployments.
+**NOTE** - This Quick Start is intended to be used as a submodule for Snyk integration in other Quick Start deployments, however it can be used as a standalone deployment within your AWS account.
 
 ## Overview
 
