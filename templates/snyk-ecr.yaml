@@ -12,6 +12,8 @@ Outputs:
     Description: Snyk ECR Integration Version
     Value: 1.0.2
 Metadata:
+  QuickStartDocumentation:
+    EntrypointName: "Snyk integration for Amazon Elastic Container Registry (ECR)"
   LICENSE: Apache License, Version 2.0
   AWS::CloudFormation::Interface:
     ParameterGroups:
@@ -27,7 +29,7 @@ Metadata:
           - QSS3KeyPrefix
     ParameterLabels:
       SnykExternalId:
-        default: Snyk Organization ID
+        default: Snyk organization ID
       QSS3BucketName:
         default: Quick Start S3 bucket name
       QSS3BucketRegion:
@@ -36,7 +38,7 @@ Metadata:
         default: Quick Start S3 key prefix
 Parameters:
   SnykExternalId:
-    Description: You may find this by logging into https://app.snyk.io and navigate to Settings.
+    Description: You may find this by logging into https://app.snyk.io and navigating to Settings.
     Type: String
     AllowedPattern: '[a-z0-9-]{36}'
     MinLength: 1
