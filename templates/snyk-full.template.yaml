@@ -17,6 +17,7 @@ Outputs:
 Metadata:
   QuickStartDocumentation:
     EntrypointName: "Snyk integration for AWS services"
+    Order: "1"
   LICENSE: Apache License, Version 2.0
   AWS::CloudFormation::Interface:
     ParameterGroups:
