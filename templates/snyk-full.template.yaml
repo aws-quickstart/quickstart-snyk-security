@@ -1,0 +1,109 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Snyk integration for AWS services. (qs-1qm9kh0j6)
+Outputs:
+  AWSRegion:
+    Description: The AWS region for your Snyk ECR intgration
+    Value: !Sub '${AWS::Region}'
+  SnykECRIntegrationRole:
+    Description: Snyk ECR Integration Role ARN
+    Value: !GetAtt 'ECRIntegrationStack.Outputs.SnykECRIntegrationRole'
+  SnykLambdaIntegrationRole:
+    Description: Snyk Lambda Integration Role ARN
+    Value: !GetAtt 'LambdaIntegrationStack.Outputs.SnykLambdaIntegrationRole'
+  Version:
+    Description: Snyk AWS Integrations Version
+    Value: 1.0.2
+Metadata:
+  QuickStartDocumentation:
+    EntrypointName: "Snyk integration for AWS services"
+  LICENSE: Apache License, Version 2.0
+  AWS::CloudFormation::Interface:
+    ParameterGroups:
+      - Label:
+          default: Snyk
+        Parameters:
+          - SnykExternalId
+      - Label:
+          default: AWS Quick Start configuration
+        Parameters:
+          - QSS3BucketName
+          - QSS3BucketRegion
+          - QSS3KeyPrefix
+    ParameterLabels:
+      SnykExternalId:
+        default: Snyk organization ID
+      QSS3BucketName:
+        default: Quick Start S3 bucket name
+      QSS3BucketRegion:
+        default: Quick Start S3 bucket region
+      QSS3KeyPrefix:
+        default: Quick Start S3 key prefix
+Parameters:
+  SnykExternalId:
+    Description: You may find this by logging into https://app.snyk.io and navigating to Settings.
+    Type: String
+    AllowedPattern: '[a-z0-9-]{36}'
+    MinLength: 1
+  QSS3BucketName:
+    AllowedPattern: ^[0-9a-zA-Z]+([0-9a-zA-Z-]*[0-9a-zA-Z])*$
+    ConstraintDescription:
+      Quick Start bucket name can include numbers, lowercase
+      letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen
+      (-).
+    Default: aws-quickstart
+    Description:
+      S3 bucket name for the Quick Start assets. This string can include
+      numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start
+      or end with a hyphen (-).
+    Type: String
+  QSS3BucketRegion:
+    Default: 'us-east-1'
+    Description: The AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. When using your own bucket, you must specify this value.
+    Type: String
+  QSS3KeyPrefix:
+    AllowedPattern: ^[0-9a-zA-Z-/.]*$
+    ConstraintDescription:
+      Quick Start key prefix can include numbers, lowercase letters,
+      uppercase letters, hyphens (-), dots(.) and forward slash (/).'
+    Default: quickstart-snyk-security/
+    Description:
+      S3 key prefix for the Quick Start assets. Quick Start key prefix
+      can include numbers, lowercase letters, uppercase letters, hyphens (-), dots(.) and
+      forward slash (/).
+    Type: String
+Conditions:
+  UsingDefaultBucket: !Equals
+    - !Ref QSS3BucketName
+    - 'aws-quickstart'
+Resources:
+  ECRIntegrationStack:
+    Type: 'AWS::CloudFormation::Stack'
+    Properties:
+      Parameters:
+        SnykExternalId: !Ref 'SnykExternalId'
+      TemplateURL: !Sub
+        - 'https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}templates/snyk-ecr.yaml'
+        - S3Bucket: !If
+            - UsingDefaultBucket
+            - !Sub 'aws-quickstart-${AWS::Region}'
+            - !Ref 'QSS3BucketName'
+          S3Region: !If
+            - UsingDefaultBucket
+            - !Ref 'AWS::Region'
+            - !Ref 'QSS3BucketRegion'
+  LambdaIntegrationStack:
+    Type: 'AWS::CloudFormation::Stack'
+    Properties:
+      Parameters:
+        SnykExternalId: !Ref 'SnykExternalId'
+      TemplateURL: !Sub
+        - 'https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}templates/snyk-lambda.yaml'
+        - S3Bucket: !If
+            - UsingDefaultBucket
+            - !Sub 'aws-quickstart-${AWS::Region}'
+            - !Ref 'QSS3BucketName'
+          S3Region: !If
+            - UsingDefaultBucket
+            - !Ref 'AWS::Region'
+            - !Ref 'QSS3BucketRegion'
