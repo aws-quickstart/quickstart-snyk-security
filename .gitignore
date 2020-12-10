@@ -34,3 +34,6 @@ fabric.properties
 .taskcat_overrides.yml
 taskcat_outputs/
 .taskcat/
+
+# ASCIIDOC
+docs/index.html
