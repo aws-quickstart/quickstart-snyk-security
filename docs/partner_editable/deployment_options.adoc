@@ -1,8 +1,9 @@
 // Edit this placeholder text to accurately describe your architecture.
 
-This Quick Start provides two deployment options:
+This Quick Start provides three deployment options:
 
-* *Deploy {partner-product-short-name} into a new VPC*. This option builds a new AWS environment consisting of the VPC, subnets, NAT gateways, security groups, bastion hosts, and other infrastructure components. It then deploys {partner-product-short-name} into this new VPC.
-* *Deploy {partner-product-short-name} into an existing VPC*. This option provisions {partner-product-short-name} in your existing AWS infrastructure.
+* *Deploy {partner-product-short-name} Security full integration*. This option enables both Amazon ECR and AWS Lambda integrations for {partner-product-short-name} as a single deployment.
+* *Deploy {partner-product-short-name} Security integration with AWS Lambda*. This option enables only the AWS Lambda integration for {partner-product-short-name}.
+* *Deploy {partner-product-short-name} Security integration with Amazon ECR*. This option enables only the Amazon ECR integration for {partner-product-short-name}.
 
-The Quick Start provides separate templates for these options. It also lets you configure Classless Inter-Domain Routing (CIDR) blocks, instance types, and {partner-product-short-name} settings, as discussed later in this guide.
+The Quick Start provides separate templates for these options.

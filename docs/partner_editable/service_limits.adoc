@@ -3,12 +3,6 @@
 |Resource |This deployment uses
 
 // Space needed to maintain table headers
-|VPCs |<n>
-|Elastic IP addresses |<n>
-|Security groups |<n>
-|AWS Identity and Access Management (IAM) roles |<n>
-|Auto Scaling groups |<n>
-|Application Load Balancers |<n>
-|Network Load Balancers |<n>
-|<type> instances |<n>
+|https://docs.aws.amazon.com/general/latest/gr/lambda-service.html[ECR] |0
+|https://docs.aws.amazon.com/general/latest/gr/lambda-service.html[Lambda] |0
 |===

@@ -2,4 +2,19 @@
 // Briefly describe the software. Use consistent and clear branding. 
 // Include the benefits of using the software on AWS, and provide details on usage scenarios.
 
-<Describe how the software works on AWS.>
+=== About Snyk
+Snyk empowers software-driven businesses to develop fast and stay secure. Snyk offers several products to secure your applications:
+
+* Snyk Open Source: Enables developers to find and automatically fix open-source vulnerabilities.
+* Snyk Container: Find and fix vulnerabilities in container images and Kubernetes applications.
+* Snyk Infrastructure as Code: Find and fix insecure configurations in Infrastructure as Code (IaC) tools and Kubernetes code.
+* Snyk Intel Vulnerability DB Access: Comprehensive and actionable open-source and container vulnerability data.
+* Snyk License Compliance Management: Identify, monitor, and manage open-source license usage across your projects.
+
+==== Snyk Container and Amazon ECR
+
+Snyk integrates with Amazon ECR to help you import your projects and monitor your containers for vulnerabilities.  Snyk tests your imported projects for known security vulnerabilities at a frequency that you control. Integration with Amazon ECR is available for all pricing plans. For more information, see https://snyk.io/product/container-vulnerability-management/[Snyk Container].
+
+==== Snyk Open Source and AWS Lambda
+
+Snyk integrates with AWS Lambda to help you monitor your deployed AWS Lambda resources. With this integration, you can scan Lambda functions deployed to your AWS account and start managing the security of your code by identifying vulnerabilities and getting fix advice.

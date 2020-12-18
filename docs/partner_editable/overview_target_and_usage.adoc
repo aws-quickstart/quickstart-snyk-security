@@ -1,7 +1,9 @@
 // Replace the content in <>
 // Identify your target audience and explain how/why they would use this Quick Start.
-//Avoid borrowing text from third-party websites (copying text from AWS service documentation is fine). Also, avoid marketing-speak, focusing instead on the technical aspect.
+// Avoid borrowing text from third-party websites (copying text from AWS service documentation is fine). Also, avoid marketing-speak, focusing instead on the technical aspect.
 
 This guide provides instructions for deploying the {partner-product-short-name} Quick Start reference architecture on the AWS Cloud.
 
-This Quick Start is for users who <target audience and usage scenario>
+Snyk finds and fixes vulnerabilities in applications that use open-source, serverless, and container solutions. Snyk's seamless integration into the developer workflow, with continuous monitoring of applications in production, empowers developers to continue to release fast, while ensuring secure code.
+
+This Quick Start is for developers, DevOps, security teams, and other roles within an organization who build, deploy, and maintain serverless applications or container images that leverage AWS Lambda and Amazon Elastic Container Registry (Amazon ECR).

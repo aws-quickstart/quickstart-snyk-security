@@ -2,12 +2,15 @@
 
 ==== Prepare your AWS account
 
-_Describe any setup required in the AWS account prior to template launch_
+This Quick Start assumes that you already have Amazon ECR repositories and/or Lambda functions provisioned in your account.
 
 ==== Prepare your {partner-company-name} account
+:xrefstyle: short
+[#settings1]
+image::../images/snyk_org_id_settings.png[Snyk Organization ID,width=100%,height=100%]
 
-_Describe any setup required in the partner portal/account prior to template launch_
+As shown in the <<settings1>>, log in to your https://app.snyk.io/[Snyk account] and obtain your *Organization ID*.
 
-==== Prepare for the deployment
+// ==== Prepare for the deployment
 
-_Describe any preparation required to complete the product build, such as obtaining licenses or placing files in S3_
+// _Describe any preparation required to complete the product build, such as obtaining licenses or placing files in S3_
