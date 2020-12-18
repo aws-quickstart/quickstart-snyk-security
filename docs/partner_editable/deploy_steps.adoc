@@ -9,14 +9,14 @@ ifdef::marketplace_subscription[]
 === Sign in to your {partner-product-short-name} account
 
 This Quick Start requires a registered {partner-product-short-name} account with any plan: Free, Standard, Pro, or Enterprise.
-To purchase Standard or Pro plans through the AWS Marketplace, proceed with the following steps:
+To purchase Standard or Pro plans through the AWS Marketplace, do the following steps:
 
 . Sign in to your AWS account.
-. {marketplace_listing_url}[Open the page for the {partner-product-short-name} Developer-First Security in AWS Marketplace], and then choose *Continue to Subscribe*.
+. Open the {marketplace_listing_url}[{partner-product-short-name} Developer-First Security page] in AWS Marketplace, and then choose *Continue to Subscribe*.
 . Review the terms and conditions for software usage, and then choose *Accept Terms*. +
   A confirmation page loads, and an email confirmation is sent to the account owner. For detailed subscription instructions, see the https://aws.amazon.com/marketplace/help/200799470[AWS Marketplace documentation^].
 
-. When the subscription process is complete, exit out of AWS Marketplace without further action.
+. When the subscription process is complete, close the AWS Marketplace without further action.
 endif::marketplace_subscription[]
 // \Not to be edited
 

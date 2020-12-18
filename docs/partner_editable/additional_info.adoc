@@ -4,23 +4,23 @@
 == Test the deployment
 // If steps are required to test the deployment, add them here. If not, remove the heading
 
-=== Snyk integration with Amazon Elastic Container Registry
+=== Snyk integration with Amazon ECR
 . Log in to your Snyk account.
-. Go to *Projects*, click *Add projects* and select *Amazon ECR*.
+. Go to *Projects*,  select *Add projects*, and then select *Amazon ECR*.
 . Select single or multiple images.
-. Click Add selected repositories.
+. Select *Add selected repositories*.
 
-Additional documentation is available https://support.snyk.io/hc/en-us/articles/360003947077-Amazon-Elastic-Container-Registry-ECR-add-images-to-Snyk[here].
+For more information, see https://support.snyk.io/hc/en-us/articles/360003947077-Amazon-Elastic-Container-Registry-ECR-add-images-to-Snyk[Amazon Elastic Container Registry (ECR): add images to Snyk].
 
 === Snyk integration with AWS Lambda
 . Log in to your Snyk account.
-. Go to *Projects*, click *Add projects* and select *AWS Lambda*.
+. Go to *Projects*, select *Add projects*, and then select *AWS Lambda*.
 . Select the relevant functions.
-. Click Add selected functions.
+. Select *Add selected functions*.
 
-_Snyk currently supports integration with AWS Lambda for Node, Ruby and Java projects._
+NOTE: Snyk currently supports integration with AWS Lambda for Node, Ruby, and Java projects.
 
-Additional documentation is available https://support.snyk.io/hc/en-us/articles/360004002418-AWS-Lambda-integration[here].
+For more information, see https://support.snyk.io/hc/en-us/articles/360004002418-AWS-Lambda-integration[AWS Lambda integration].
 
 // == Post-deployment steps
 // If post-deployment steps are required, add them here. If not, remove the heading
@@ -35,7 +35,7 @@ Additional documentation is available https://support.snyk.io/hc/en-us/articles/
 
 // _Add any security-related information._
 
-== Other useful information
+// == Other useful information
 //Provide any other information of interest to users, especially focusing on areas where AWS or cloud usage differs from on-premises usage.
 
-_Add any other details that will help the customer use the software on AWS._
+//Add any other details that will help the customer use the software on AWS.
