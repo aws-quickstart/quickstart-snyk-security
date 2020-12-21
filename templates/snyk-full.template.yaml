@@ -15,6 +15,9 @@ Outputs:
     Description: Snyk AWS Integrations Version
     Value: 1.0.2
 Metadata:
+  cfn-lint: { config: { ignore_checks: [ W9901 ] } }
+  QSLint:
+    Exclusions: [W9006]
   QuickStartDocumentation:
     EntrypointName: "Snyk integration for AWS services"
     Order: "1"
