@@ -9,6 +9,8 @@ Outputs:
     Description: Snyk Lambda Integration Version
     Value: 1.0.2
 Metadata:
+  QSLint:
+    Exclusions: [W9006]
   QuickStartDocumentation:
     EntrypointName: "Snyk integration for AWS Lambda"
     Order: "2"
@@ -19,50 +21,15 @@ Metadata:
           default: Snyk
         Parameters:
           - SnykExternalId
-      - Label:
-          default: AWS Quick Start configuration
-        Parameters:
-          - QSS3BucketName
-          - QSS3BucketRegion
-          - QSS3KeyPrefix
     ParameterLabels:
       SnykExternalId:
         default: Snyk organization ID
-      QSS3BucketName:
-        default: Quick Start S3 bucket name
-      QSS3BucketRegion:
-        default: Quick Start S3 bucket Region
-      QSS3KeyPrefix:
-        default: Quick Start S3 key prefix
 Parameters:
   SnykExternalId:
     Description: Locate the organization ID by logging in to https://app.snyk.io and navigating to Settings.
     Type: String
     AllowedPattern: '[a-z0-9-]{36}'
     MinLength: 1
-  QSS3BucketName:
-    AllowedPattern: ^[0-9a-zA-Z]+([0-9a-zA-Z-]*[0-9a-zA-Z])*$
-    ConstraintDescription:
-      Quick Start bucket name can include numbers, lowercase
-      letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen
-      (-).
-    Default: aws-quickstart
-    Description:
-      Name of the S3 bucket for your copy of the Quick Start assets. Keep the default name unless you are customizing the template. Changing the name updates code references to point to a new Quick Start location. This name can include numbers, lowercase letters, uppercase letters, and hyphens, but do not start or end with a hyphen (-). See https://aws-quickstart.github.io/option1.html.
-    Type: String
-  QSS3BucketRegion:
-    Default: 'us-east-1'
-    Description: 'AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. Keep the default Region unless you are customizing the template. Changing this Region updates code references to point to a new Quick Start location. When using your own bucket, specify the Region. See https://aws-quickstart.github.io/option1.html.'
-    Type: String
-  QSS3KeyPrefix:
-    AllowedPattern: ^[0-9a-zA-Z-/.]*$
-    ConstraintDescription:
-      The Quick Start S3 key prefix can include numbers, lowercase letters,
-      uppercase letters, hyphens (-), and forward slash (/).
-    Default: quickstart-snyk-security/
-    Description:
-      S3 key prefix that is used to simulate a directory for your copy of the Quick Start assets. Keep the default prefix unless you are customizing the template. Changing this prefix updates code references to point to a new Quick Start location. This prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slashes (/). See https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html and https://aws-quickstart.github.io/option1.html.
-    Type: String
 Resources:
   SnykLambdaIntegrationRole:
     Type: 'AWS::IAM::Role'
