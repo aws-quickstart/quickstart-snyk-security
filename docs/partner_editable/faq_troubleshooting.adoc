@@ -21,25 +21,25 @@ For more information, see https://docs.aws.amazon.com/AWSCloudFormation/latest/U
 
 === AWS resources
 
-* https://aws.amazon.com/getting-started/[Getting Started Resource Center]
-* https://docs.aws.amazon.com/general/latest/gr/[AWS General Reference]
-* https://docs.aws.amazon.com/general/latest/gr/glos-chap.html[AWS Glossary]
+* https://aws.amazon.com/getting-started/[Getting Started Resource Center^]
+* https://docs.aws.amazon.com/general/latest/gr/[AWS General Reference^]
+* https://docs.aws.amazon.com/general/latest/gr/glos-chap.html[AWS Glossary^]
 
 === AWS services
 
-* https://docs.aws.amazon.com/cloudformation/[AWS CloudFormation]
-* https://docs.aws.amazon.com/iam/[IAM]
-* https://aws.amazon.com/ecr/[Amazon Elastic Container Registry (ECR)]
-* https://aws.amazon.com/lambda/[AWS Lambda]
+* https://docs.aws.amazon.com/cloudformation/[AWS CloudFormation^]
+* https://docs.aws.amazon.com/iam/[IAM^]
+* https://aws.amazon.com/ecr/[Amazon Elastic Container Registry (ECR)^]
+* https://aws.amazon.com/lambda/[AWS Lambda^]
 
 === Snyk documentation
 
-* https://support.snyk.io/hc/en-us[Snyk Knowledge Center]
+* https://support.snyk.io/hc/en-us[Snyk Knowledge Center^]
 
 === Other Quick Start reference deployments
 
-* https://aws.amazon.com/quickstart/?quickstart-all.sort-by=item.additionalFields.updateDate&quickstart-all.sort-order=desc&awsf.quickstart-homepage-filter=categories%23containers[AWS Container Quick Start home page]
-* https://aws.amazon.com/quickstart/[AWS Quick Start home page]
+* https://aws.amazon.com/quickstart/?quickstart-all.sort-by=item.additionalFields.updateDate&quickstart-all.sort-order=desc&awsf.quickstart-homepage-filter=categories%23containers[AWS Container Quick Start home page^]
+* https://aws.amazon.com/quickstart/[AWS Quick Start home page^]
 
 == Troubleshooting
 
