@@ -7,10 +7,10 @@ This Quick Start assumes that you already have Amazon ECR repositories and/or La
 ==== Prepare your {partner-company-name} account
 :xrefstyle: short
 [#settings1]
-.Snyk Settings
+.Snyk Settings page
 image::../images/snyk_org_id_settings.png[Snyk Organization ID,width=100%,height=100%]
 
-As shown in the <<settings1>>, log in to your https://app.snyk.io/[Snyk account] and obtain your *Organization ID*.
+As shown in the <<settings1>>, log in to your https://app.snyk.io/[Snyk account] and obtain your Organization ID.
 
 // ==== Prepare for the deployment
 
