@@ -10,7 +10,7 @@
 . Select single or multiple images.
 . Select *Add selected repositories*.
 
-For more information, see https://support.snyk.io/hc/en-us/articles/360003947077-Amazon-Elastic-Container-Registry-ECR-add-images-to-Snyk[Amazon Elastic Container Registry (ECR): add images to Snyk].
+For more information, see https://support.snyk.io/hc/en-us/articles/360003947077-Amazon-Elastic-Container-Registry-ECR-add-images-to-Snyk[Amazon Elastic Container Registry (ECR): add images to Snyk^].
 
 === Snyk integration with AWS Lambda
 . Log in to your Snyk account.
@@ -20,7 +20,7 @@ For more information, see https://support.snyk.io/hc/en-us/articles/360003947077
 
 NOTE: Snyk currently supports integration with AWS Lambda for Node, Ruby, and Java projects.
 
-For more information, see https://support.snyk.io/hc/en-us/articles/360004002418-AWS-Lambda-integration[AWS Lambda integration].
+For more information, see https://support.snyk.io/hc/en-us/articles/360004002418-AWS-Lambda-integration[AWS Lambda integration^].
 
 // == Post-deployment steps
 // If post-deployment steps are required, add them here. If not, remove the heading
