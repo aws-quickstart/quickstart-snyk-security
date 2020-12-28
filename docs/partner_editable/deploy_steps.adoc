@@ -12,7 +12,7 @@ This Quick Start requires a registered {partner-product-short-name} account with
 To purchase Standard or Pro plans through the AWS Marketplace, do the following steps:
 
 . Sign in to your AWS account.
-. Open the {marketplace_listing_url}[{partner-product-short-name} Developer-First Security page] in AWS Marketplace, and then choose *Continue to Subscribe*.
+. Open the {marketplace_listing_url}[{partner-product-short-name} Developer-First Security page^] in AWS Marketplace, and then choose *Continue to Subscribe*.
 . Review the terms and conditions for software usage, and then choose *Accept Terms*. +
   A confirmation page loads, and an email confirmation is sent to the account owner. For detailed subscription instructions, see the https://aws.amazon.com/marketplace/help/200799470[AWS Marketplace documentation^].
 
