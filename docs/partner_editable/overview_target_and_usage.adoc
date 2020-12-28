@@ -6,4 +6,4 @@ This guide provides instructions for deploying the {partner-product-short-name} 
 
 Snyk finds and fixes vulnerabilities in applications that use open-source, serverless, and container solutions. Snyk's seamless integration into the developer workflow, with continuous monitoring of applications in production, empowers developers to continue to release fast, while ensuring secure code.
 
-This Quick Start is for developers, DevOps, security teams, and other roles within an organization who build, deploy, and maintain serverless applications or container images that leverage AWS Lambda and Amazon Elastic Container Registry (Amazon ECR).
+This Quick Start is for developers, DevOps, security teams, and other roles within an organization that build, deploy, and maintain serverless applications or container images that use AWS Lambda and Amazon Elastic Container Registry (Amazon ECR).
