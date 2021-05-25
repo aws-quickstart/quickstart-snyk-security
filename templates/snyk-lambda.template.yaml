@@ -21,15 +21,22 @@ Metadata:
           default: Snyk
         Parameters:
           - SnykExternalId
+          - LambdaResourceARN
     ParameterLabels:
       SnykExternalId:
         default: Snyk organization ID
+      LambdaResourceARN:
+        default: Lambda Resource ARN
 Parameters:
   SnykExternalId:
     Description: Locate the organization ID by logging in to https://app.snyk.io and navigating to Settings.
     Type: String
     AllowedPattern: '[a-z0-9-]{36}'
     MinLength: 1
+  LambdaResourceARN:
+    Description: The ARN of the Lambda resource(s). List multiple resource ARN's separated by a comma.
+    Type: CommaDelimitedList
+    Default: '*'
 Resources:
   SnykLambdaIntegrationRole:
     Type: 'AWS::IAM::Role'
@@ -54,8 +61,13 @@ Resources:
                 Action:
                   [
                     'lambda:ListFunctions',
-                    'lambda:GetFunction',
-                    'lambda:ListAliases',
                     'lambda:GetAccountSettings'
                   ]
                 Resource: '*'
+              - Effect: Allow
+                Action:
+                  [
+                    'lambda:GetFunction',
+                    'lambda:ListAliases'
+                  ]
+                Resource: !Ref LambdaResourceARN

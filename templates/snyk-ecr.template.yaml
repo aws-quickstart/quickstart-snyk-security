@@ -24,15 +24,22 @@ Metadata:
           default: Snyk
         Parameters:
           - SnykExternalId
+          - ECRResourceARN
     ParameterLabels:
       SnykExternalId:
         default: Snyk organization ID
+      ECRResourceARN:
+        default: ECR Resource ARN
 Parameters:
   SnykExternalId:
     Description: Locate the organization ID by logging in to https://app.snyk.io and navigating to Settings.
     Type: String
     AllowedPattern: '[a-z0-9-]{36}'
     MinLength: 1
+  ECRResourceARN:
+    Description: The ARN of the ECR resource(s). List multiple resource ARN's separated by a comma.
+    Type: CommaDelimitedList
+    Default: '*'
 Resources:
   SnykECRIntegrationRole:
     Type: 'AWS::IAM::Role'
@@ -55,6 +62,10 @@ Resources:
             Statement:
               - Effect: Allow
                 Action:
+                  - 'ecr:GetAuthorizationToken'
+                Resource: '*'
+              - Effect: Allow
+                Action:
                   [
                     'ecr:GetLifecyclePolicyPreview',
                     'ecr:GetDownloadUrlForLayer',
@@ -68,4 +79,4 @@ Resources:
                     'ecr:GetRepositoryPolicy',
                     'ecr:GetLifecyclePolicy'
                   ]
-                Resource: '*'
+                Resource: !Ref ECRResourceARN
