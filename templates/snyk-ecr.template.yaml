@@ -24,10 +24,13 @@ Metadata:
           default: Snyk
         Parameters:
           - SnykExternalId
+          - SnykAWSAccountNumber
           - ECRResourceARN
     ParameterLabels:
       SnykExternalId:
         default: Snyk organization ID
+      SnykAWSAccountNumber:
+        default: Snyk AWS Account ID
       ECRResourceARN:
         default: ECR Resource ARN
 Parameters:
@@ -36,6 +39,9 @@ Parameters:
     Type: String
     AllowedPattern: '[a-z0-9-]{36}'
     MinLength: 1
+  SnykAWSAccountNumber:
+    Description: "Snyk's AWS Account ID which assumes a role in your account. Please see the deployment guide 'Technical requirements | Snyk Account Access' for this Account ID"
+    Type: String
   ECRResourceARN:
     Description: The ARN of the ECR resource(s). List multiple resource ARN's separated by a comma.
     Type: CommaDelimitedList
@@ -49,7 +55,7 @@ Resources:
         Statement:
           - Effect: Allow
             Principal:
-              AWS: arn:aws:iam::198361731867:root
+              AWS: !Sub arn:${AWS::Partition}:iam::${SnykAWSAccountNumber}:root
             Action: sts:AssumeRole
             Condition:
               StringEquals:

@@ -28,6 +28,7 @@ Metadata:
           default: Snyk
         Parameters:
           - SnykExternalId
+          - SnykAWSAccountNumber
       - Label:
           default: AWS Quick Start configuration
         Parameters:
@@ -37,6 +38,8 @@ Metadata:
     ParameterLabels:
       SnykExternalId:
         default: Snyk organization ID
+      SnykAWSAccountNumber:
+        default: Snyk AWS Account ID
       QSS3BucketName:
         default: Quick Start S3 bucket name
       QSS3BucketRegion:
@@ -49,6 +52,9 @@ Parameters:
     Type: String
     AllowedPattern: '[a-z0-9-]{36}'
     MinLength: 1
+  SnykAWSAccountNumber:
+    Description: "Snyk's AWS Account ID which assumes a role in your account. Please see the deployment guide 'Technical requirements | Snyk Account Access' for this Account ID"
+    Type: String
   QSS3BucketName:
     AllowedPattern: ^[0-9a-zA-Z]+([0-9a-zA-Z-]*[0-9a-zA-Z])*$
     ConstraintDescription:
@@ -82,6 +88,7 @@ Resources:
     Properties:
       Parameters:
         SnykExternalId: !Ref 'SnykExternalId'
+        SnykAWSAccountNumber: !Ref 'SnykAWSAccountNumber'
       TemplateURL: !Sub
         - 'https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}templates/snyk-ecr.yaml'
         - S3Bucket: !If
@@ -97,6 +104,7 @@ Resources:
     Properties:
       Parameters:
         SnykExternalId: !Ref 'SnykExternalId'
+        SnykAWSAccountNumber: !Ref 'SnykAWSAccountNumber'
       TemplateURL: !Sub
         - 'https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}templates/snyk-lambda.yaml'
         - S3Bucket: !If
