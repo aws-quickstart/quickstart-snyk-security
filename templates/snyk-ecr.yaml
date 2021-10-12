@@ -70,6 +70,55 @@ Parameters:
       forward slash (/).
     Type: String
 Resources:
+  LambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+              - lambda.amazonaws.com
+            Action:
+            - sts:AssumeRole
+      Path: "/"
+      Policies:
+        - PolicyName: AmazonLambdaExecuteForSnyk
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                Resource: arn:aws:logs:*:*:*
+              - Effect: Allow
+                Action:
+                  - lambda:InvokeFunction
+                Resource: '*'
+  AddSnykIntegrationLambdaFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code:
+        S3Bucket: !Ref QSS3BucketName
+        S3Key: !Sub '${QSS3KeyPrefix}lambda_functions/packages/AddSnykIntegration/lambda.zip'
+      Environment:
+        Variables:
+          awsRegion: !Ref QSS3BucketRegion
+          awsRoleArn: !GetAtt LambdaExecutionRole.Arn
+          orgId: !Ref SnykExternalId
+      Handler: lambda_function.handler
+      Runtime: nodejs14.x
+      Timeout: 30
+      Role: !GetAtt LambdaExecutionRole.Arn
+  CreateSnykIntegration:
+    Type: Custom::CreateSnykIntegration
+    Properties:
+      ServiceToken: !GetAtt AddSnykIntegrationLambdaFunction.Arn
+      Region: !Ref 'AWS::Region'
+      SnykOrgId: !Ref 'SnykExternalId'
   SnykECRIntegrationRole:
     Type: 'AWS::IAM::Role'
     Properties:
