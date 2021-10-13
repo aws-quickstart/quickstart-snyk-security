@@ -6,6 +6,7 @@ const axios = require('axios');
 // are passed to the Lambda as environment variables. Set them
 // to variables to avoid typing process.env all the time.
 const orgID = process.env.orgId;
+const authToken = process.env.authToken;
 const awsRegion = process.env.awsRegion;
 const awsRoleArn = process.env.awsRoleArn;
 
@@ -22,34 +23,64 @@ exports.handler = (event, context) => {
       const snykAPI = `https://snyk.io/api/v1/org/${orgID}/integrations`;
       console.log('snykAPI: ', snykAPI);
 
-      // Make the request
-      // @see https://snyk.docs.apiary.io/#reference/integrations/integrations/add-new-integration
-      //
-      // - Likely no reason to use async here, this is the only thing
-      //   we're doing on Create.
-      //
-      // @TODO: Switch this to post once ready to make the request.
-      //
+      // First do a GET on the organization's integrations to see if there's an ECR
+      // integration already, if there is, we need to skip.
+      // @TODO: Should we report this as a failure or success?
       axios.get(snykAPI, {
         timeout: 10000,
         headers: {
-          'Authorization': `token ${orgID}` // This should supposedly work, but usually is an API token.
-        },
-        data: {
-          type: 'ecr',
-          credentials: {
-            region: awsRegion,
-            roleArn: awsRoleArn
-          }
+          'Authorization': `token ${authToken}`
         }
       }).then( response => {
-        console.log('Response Type: ', typeof (response));
-        console.log('Response: ', response);
-        sendResponse(event, context, 'SUCCESS', response.data);
+        const data = response.data;
+        console.log(data);
+        let existingECRIntegration = false;
+
+        for (let i = 0; i < data.length; i++) {
+          if (data[i].type && data[i].type === 'ecr') {
+            existingECRIntegration = true;
+            break;
+          }
+        }
+
+        if (existingECRIntegration === false) {
+
+          // Make the post request
+          // Make the request
+          // @see https://snyk.docs.apiary.io/#reference/integrations/integrations/add-new-integration
+          //
+          // - Likely no reason to use async here, this is the only thing
+          //   we're doing on Create.
+          //
+          // @TODO: Switch this to post once ready to make the request.
+          //
+          axios.get(snykAPI, {
+            timeout: 10000,
+            headers: {
+              'Authorization': `token ${authToken}`
+            },
+            data: {
+              type: 'ecr',
+              credentials: {
+                region: awsRegion,
+                roleArn: awsRoleArn
+              }
+            }
+          }).then( response => {
+            console.log('Response Type: ', typeof (response));
+            console.log('Response: ', response);
+            sendResponse(event, context, 'SUCCESS', response.data);
+          }).catch( error => {
+            console.log('Error in Snyk request: ', error);
+            sendResponse(event, context, 'FAILED', error);
+          });
+
+        }
       }).catch( error => {
         console.log('Error in Snyk request: ', error);
         sendResponse(event, context, 'FAILED', error);
       });
+
     } catch(e) {
       console.log('Error during API call:\n', e);
       sendResponse(event, context, 'FAILED', response.data);

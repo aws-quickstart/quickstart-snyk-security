@@ -21,6 +21,7 @@ Metadata:
           default: Snyk
         Parameters:
           - SnykExternalId
+          - SnykAuthToken
       - Label:
           default: AWS Quick Start configuration
         Parameters:
@@ -30,6 +31,8 @@ Metadata:
     ParameterLabels:
       SnykExternalId:
         default: Snyk organization ID
+      SnykAuthToken:
+        default: Snyk API authentication token
       QSS3BucketName:
         default: Quick Start S3 bucket name
       QSS3BucketRegion:
@@ -41,7 +44,12 @@ Parameters:
     Description: You may find this by logging into https://app.snyk.io and navigating to Settings.
     Type: String
     AllowedPattern: '[a-z0-9-]{36}'
-    MinLength: 1
+    MinLength: 36
+  SnykAuthToken:
+    Description: It is recommended that you use a Service Account token instead of your personal API Token.
+    Type: String
+    AllowedPattern: '[a-z0-9-]{36}'
+    MinLength: 36
   QSS3BucketName:
     AllowedPattern: ^[0-9a-zA-Z]+([0-9a-zA-Z-]*[0-9a-zA-Z])*$
     ConstraintDescription:
@@ -107,8 +115,9 @@ Resources:
       Environment:
         Variables:
           awsRegion: !Ref QSS3BucketRegion
-          awsRoleArn: !GetAtt LambdaExecutionRole.Arn
+          awsRoleArn: !GetAtt SnykECRIntegrationRole.Arn
           orgId: !Ref SnykExternalId
+          authToken: !Ref SnykAuthToken
       Handler: lambda_function.handler
       Runtime: nodejs14.x
       Timeout: 30
@@ -119,6 +128,7 @@ Resources:
       ServiceToken: !GetAtt AddSnykIntegrationLambdaFunction.Arn
       Region: !Ref 'AWS::Region'
       SnykOrgId: !Ref 'SnykExternalId'
+      SnykAuthToken: !Ref 'SnykAuthToken'
   SnykECRIntegrationRole:
     Type: 'AWS::IAM::Role'
     Properties:
