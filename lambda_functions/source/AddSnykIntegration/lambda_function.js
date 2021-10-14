@@ -1,6 +1,6 @@
-// @TODO - Axios likely isn't necessary, it's simply convenient -
-//         migrate to https.request maybe.
-const axios = require('axios');
+const https = require('https');
+const url = require('url')
+const request = require('request');
 
 // The CloudFormation template provides a number of inputs which
 // are passed to the Lambda as environment variables. Set them
@@ -9,6 +9,16 @@ const orgID = process.env.orgId;
 const authToken = process.env.authToken;
 const awsRegion = process.env.awsRegion;
 const awsRoleArn = process.env.awsRoleArn;
+
+// Set up some messages:
+const messages = {
+  integrationExists: `An existing ECR integration already exists for the provided Snyk organization: ${orgID}.`,
+  integrationCreated: `Successfully created ECR integration for Snyk organization ${orgID}`,
+  problemCreatingIntegration: `A problem occurred while attempting to create an ECR integration in Snyk for organization ${orgID}.`,
+  APIGetError: 'Error during GET request to Snyk API.',
+  APIPostError: 'Error during POST request to Snyk API.',
+  notCreateEvent: 'Skipping Snyk integration creation... This is not a CloudFormation CREATE event.'
+}
 
 // Entrypoint function
 //
@@ -19,74 +29,73 @@ exports.handler = (event, context) => {
   // Only act on Create.
   if (event.RequestType === 'Create') {
     try {
-      // Construct the Snyk API request URL.
-      const snykAPI = `https://snyk.io/api/v1/org/${orgID}/integrations`;
-      console.log('snykAPI: ', snykAPI);
-
       // First do a GET on the organization's integrations to see if there's an ECR
       // integration already, if there is, we need to skip.
-      // @TODO: Should we report this as a failure or success?
-      axios.get(snykAPI, {
-        timeout: 10000,
+
+      // request and axios are easier to chain off of than pure https, but it could be done.
+      request({
+        method: 'GET',
+        url: `https://snyk.io/api/v1/org/${orgID}/integrations`,
         headers: {
+          'Content-Type': 'application/json; charset=utf-8',
           'Authorization': `token ${authToken}`
         }
-      }).then( response => {
-        const data = response.data;
-        console.log(data);
-        let existingECRIntegration = false;
+      }, (error, response, body) => {
 
-        for (let i = 0; i < data.length; i++) {
-          if (data[i].type && data[i].type === 'ecr') {
+        if (!error) {
+          const data = response.body;
+          let existingECRIntegration = false;
+
+          if (data.ecr && data.ecr !== '') {
             existingECRIntegration = true;
-            break;
           }
-        }
 
-        if (existingECRIntegration === false) {
-
-          // Make the post request
-          // Make the request
-          // @see https://snyk.docs.apiary.io/#reference/integrations/integrations/add-new-integration
-          //
-          // - Likely no reason to use async here, this is the only thing
-          //   we're doing on Create.
-          //
-          // @TODO: Switch this to post once ready to make the request.
-          //
-          axios.get(snykAPI, {
-            timeout: 10000,
-            headers: {
-              'Authorization': `token ${authToken}`
-            },
-            data: {
-              type: 'ecr',
-              credentials: {
-                region: awsRegion,
-                roleArn: awsRoleArn
+          // If there is no existing ECR Integration for this organization within Snyk,
+          // it is safe to create one.
+          if (existingECRIntegration === false) {
+            request({
+              method: 'POST',
+              url: `https://snyk.io/api/v1/org/${orgID}/integrations`,
+              headers: {
+                'Content-Type': 'application/json; charset=utf-8',
+                'Authorization': `token ${authToken}`
+              },
+              body: "{  \"type\": \"ecr\",  \"credentials\": {    \"region\": \"" + awsRegion + "\",    \"roleArn\": \"" + awsRoleArn + "\"  }}"
+            }, (error, response, body) => {
+              console.log('response status', response.statusCode);
+              if (response.statusCode === 200 || response.statusCode === 201) {
+                console.log(messages.integrationCreated);
+                sendResponse(event, context, 'SUCCESS', JSON.parse(body));
+              } else {
+                let message;
+                response.statusCode === 409 ? message = messages.integrationExists : message = messages.problemCreatingIntegration;
+                sendResponse(event, context, 'FAILED', error !== null ? error : message);
               }
-            }
-          }).then( response => {
-            console.log('Response Type: ', typeof (response));
-            console.log('Response: ', response);
-            sendResponse(event, context, 'SUCCESS', response.data);
-          }).catch( error => {
-            console.log('Error in Snyk request: ', error);
-            sendResponse(event, context, 'FAILED', error);
-          });
+            });
+          } else {
+            // The GET request returned an existing ECR integration with Snyk.
+            // Tell CloudFormation we've failed.
+            sendResponse(event, context, 'FAILED', messages.integrationExists);
+          }
 
+        } else {
+          // An error was received from the GET request. Shut it down.
+          console.log(messages.APIGetError, error);
+          sendResponse(event, context, 'FAILED', error);
         }
-      }).catch( error => {
-        console.log('Error in Snyk request: ', error);
-        sendResponse(event, context, 'FAILED', error);
+
       });
+
 
     } catch(e) {
       console.log('Error during API call:\n', e);
       sendResponse(event, context, 'FAILED', response.data);
     }
   } else {
-    sendResponse(event, context, 'SUCCESS', {});
+    // If CloudFormation isn't sending this function a Create event, succeed with
+    // a note saying the integration creation has been skipped.
+    // It may be a good idea to remove the integration that exists on a tear-down event.
+    sendResponse(event, context, 'SUCCESS', messages.notCreateEvent);
   }
 }
 
@@ -107,10 +116,8 @@ const sendResponse = (event, context, responseStatus, responseData) => {
     Data: responseData
   })
 
-  console.log('Response Body:\n', responseBody);
+  console.log('Response Body to reply to CloudFormation:\n', responseBody);
 
-  const https = require('https');
-  const url = require('url')
   const parsedUrl = url.parse(event.ResponseURL);
   const options = {
     hostname: parsedUrl.hostname,
@@ -127,14 +134,14 @@ const sendResponse = (event, context, responseStatus, responseData) => {
 
   // Construct the request using the above option values.
   const request = https.request(options, (response) => {
-    console.log('STATUS: ', response.statusCode);
-    console.log('HEADERS: ', JSON.stringify(response.headers));
+    console.log('Response to CloudFormation - STATUS:\n', response.statusCode);
+    console.log('Response to CloudFormation - HEADERS:\n', JSON.stringify(response.headers));
     // Tell Lambda the function is done.
     context.done();
   });
 
   request.on('error', (error) => {
-    console.log('sendResponse Error: ', error);
+    console.log('Response to CloudFormation - Error:\n', error);
     context.done();
   });
 
