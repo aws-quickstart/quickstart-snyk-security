@@ -24,6 +24,7 @@ Metadata:
           default: Snyk
         Parameters:
           - SnykExternalId
+          - SnykAuthToken
       - Label:
           default: AWS Quick Start configuration
         Parameters:
@@ -33,6 +34,8 @@ Metadata:
     ParameterLabels:
       SnykExternalId:
         default: Snyk organization ID
+      SnykAuthToken:
+        default: Snyk API authentication token
       QSS3BucketName:
         default: Quick Start S3 bucket name
       QSS3BucketRegion:
@@ -42,6 +45,11 @@ Metadata:
 Parameters:
   SnykExternalId:
     Description: You may find this by logging into https://app.snyk.io and navigating to Settings.
+    Type: String
+    AllowedPattern: '[a-z0-9-]{36}'
+    MinLength: 1
+  SnykAuthToken:
+    Description: It is recommended that you use a Service Account token instead of your personal API Token.
     Type: String
     AllowedPattern: '[a-z0-9-]{36}'
     MinLength: 1
@@ -82,6 +90,7 @@ Resources:
     Properties:
       Parameters:
         SnykExternalId: !Ref 'SnykExternalId'
+        SnykAuthToken: !Ref 'SnykAuthToken'
       TemplateURL: !Sub
         - 'https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}templates/snyk-ecr.yaml'
         - S3Bucket: !If
