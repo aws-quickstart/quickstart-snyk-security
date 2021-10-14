@@ -69,19 +69,19 @@ exports.handler = (event, context) => {
               } else {
                 let message;
                 response.statusCode === 409 ? message = messages.integrationExists : message = messages.problemCreatingIntegration;
-                sendResponse(event, context, 'FAILED', error !== null ? error : message);
+                sendResponse(event, context, 'FAILED', error !== null ? {message: error} : {message});
               }
             });
           } else {
             // The GET request returned an existing ECR integration with Snyk.
             // Tell CloudFormation we've failed.
-            sendResponse(event, context, 'FAILED', messages.integrationExists);
+            sendResponse(event, context, 'FAILED', {message: messages.integrationExists});
           }
 
         } else {
           // An error was received from the GET request. Shut it down.
           console.log(messages.APIGetError, error);
-          sendResponse(event, context, 'FAILED', error);
+          sendResponse(event, context, 'FAILED', {message: error});
         }
 
       });
@@ -89,13 +89,13 @@ exports.handler = (event, context) => {
 
     } catch(e) {
       console.log('Error during API call:\n', e);
-      sendResponse(event, context, 'FAILED', response.data);
+      sendResponse(event, context, 'FAILED', {message: e});
     }
   } else {
     // If CloudFormation isn't sending this function a Create event, succeed with
     // a note saying the integration creation has been skipped.
     // It may be a good idea to remove the integration that exists on a tear-down event.
-    sendResponse(event, context, 'SUCCESS', messages.notCreateEvent);
+    sendResponse(event, context, 'SUCCESS', {message: messages.notCreateEvent});
   }
 }
 
