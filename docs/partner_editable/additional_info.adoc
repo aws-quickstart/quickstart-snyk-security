@@ -16,6 +16,8 @@ add repositories to scan with Snyk by performing the following:
 
 For more information, see https://support.snyk.io/hc/en-us/articles/360003947077-Amazon-Elastic-Container-Registry-ECR-add-images-to-Snyk[Amazon Elastic Container Registry (ECR): add images to Snyk^].
 
+NOTE: Both the Full and Amazon ECR integration Quick Start options will automatically connect the deployed ECR instance to the Snyk organization provided in the Quick Start parameters. Deployment of these Quick Starts may fail if the selected Snyk organization has an existing ECR integration or if the authentication token provided through the Quick Start parameters has insufficient access to create the integration.
+
 === Snyk integration with AWS Lambda
 . Log in to your Snyk account.
 . Go to *Projects*, select *Add projects*, and then select *AWS Lambda*.
