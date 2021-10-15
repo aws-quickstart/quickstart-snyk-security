@@ -24,7 +24,7 @@ project:
     - us-west-2
   s3_bucket: ''
   s3_regional_buckets: true
-  template: templates/snyk-full.yaml
+  template: templates/snyk-full.template.yaml
 tests:
   ecr:
     parameters:
@@ -51,7 +51,7 @@ tests:
       - us-east-2
       - us-west-1
       - us-west-2
-    template: templates/snyk-ecr.yaml
+    template: templates/snyk-ecr.template.yaml
   lambda:
     parameters:
       QSS3BucketName: $[taskcat_autobucket]
@@ -77,4 +77,4 @@ tests:
       - us-east-2
       - us-west-1
       - us-west-2
-    template: templates/snyk-lambda.yaml
+    template: templates/snyk-lambda.template.yaml

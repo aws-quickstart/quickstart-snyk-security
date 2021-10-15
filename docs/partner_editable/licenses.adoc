@@ -1,0 +1,3 @@
+// Include details about the license and how they can sign up. If no license is required, clarify that. 
+
+This Quick Start is available to Snyk customers of all pricing plans. If you are not currently a Snyk customer, you can register for a free account on the https://app.snyk.io/login[Snyk login page^]. For information on payment plans, see the Snyk https://aws.amazon.com/marketplace/pp/B085VGM85Q?qid=1590170928622&sr=0-1&ref_=srh_res_product_title[AWS Marketplace page^].

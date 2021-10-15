@@ -1,0 +1,79 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Snyk integration for AWS Lambda. (qs-1qqfgjgbc)
+Outputs:
+  SnykLambdaIntegrationRole:
+    Description: Snyk Lambda Integration Role ARN
+    Value: !GetAtt 'SnykLambdaIntegrationRole.Arn'
+  Version:
+    Description: Snyk Lambda Integration Version
+    Value: 1.0.2
+Metadata:
+  QSLint:
+    Exclusions: [W9006]
+  QuickStartDocumentation:
+    EntrypointName: "Snyk integration for AWS Lambda"
+    Order: "2"
+  LICENSE: Apache License, Version 2.0
+  AWS::CloudFormation::Interface:
+    ParameterGroups:
+      - Label:
+          default: Snyk
+        Parameters:
+          - SnykExternalId
+          - SnykAWSAccountNumber
+          - LambdaResourceARN
+    ParameterLabels:
+      SnykExternalId:
+        default: Snyk organization ID
+      SnykAWSAccountNumber:
+        default: Snyk AWS Account ID
+      LambdaResourceARN:
+        default: Lambda Resource ARN
+Parameters:
+  SnykExternalId:
+    Description: Locate the organization ID by logging in to https://app.snyk.io and navigating to Settings.
+    Type: String
+    AllowedPattern: '[a-z0-9-]{36}'
+    MinLength: 1
+  SnykAWSAccountNumber:
+    Description: "Snyk's AWS Account ID which assumes a role in your account. Please see the deployment guide 'Technical requirements | Snyk Account Access' for this Account ID"
+    Type: String
+  LambdaResourceARN:
+    Description: The ARN of the Lambda resource(s). List multiple resource ARN's separated by a comma.
+    Type: CommaDelimitedList
+    Default: '*'
+Resources:
+  SnykLambdaIntegrationRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              AWS: !Sub arn:${AWS::Partition}:iam::${SnykAWSAccountNumber}:root
+            Action: sts:AssumeRole
+            Condition:
+              StringEquals:
+                'sts:ExternalId': !Ref 'SnykExternalId'
+      Path: /snyk/
+      Policies:
+        - PolicyName: SnykReadOnlyForLambda
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  [
+                    'lambda:ListFunctions',
+                    'lambda:GetAccountSettings'
+                  ]
+                Resource: '*'
+              - Effect: Allow
+                Action:
+                  [
+                    'lambda:GetFunction',
+                    'lambda:ListAliases'
+                  ]
+                Resource: !Ref LambdaResourceARN
