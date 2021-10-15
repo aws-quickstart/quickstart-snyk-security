@@ -5,6 +5,10 @@
 // If steps are required to test the deployment, add them here. If not, remove the heading
 
 === Snyk integration with Amazon ECR
+Deploying the Snyk Security Quickstart for ECR automatically creates
+the integration for your Snyk organization. Once deployed, you can
+add repositories to scan with Snyk by performing the following:
+
 . Log in to your Snyk account.
 . Go to *Projects*,  select *Add projects*, and then select *Amazon ECR*.
 . Select single or multiple images.

@@ -10,7 +10,24 @@ This Quick Start assumes that you already have Amazon ECR repositories and/or La
 .Snyk Settings page
 image::../images/snyk_org_id_settings.png[Snyk Organization ID,width=100%,height=100%]
 
-As shown in the <<settings1>>, log in to your https://app.snyk.io/[Snyk account] and obtain your Organization ID.
+Regardless of which quickstart option you choose, log in to your https://app.snyk.io/[Snyk Account], as shown in <<settings1>>, and obtain your Organization ID.
+
+If you are deploying Snyk Security with full integration or solely for Amazon ECR, obtain an API authentication token. This token is used to automate the creation of ECR integrations within Snyk.
+
+You may use either your personal account token, available via your Snyk account's settings page as shown in <<settings2>>,
+or a Service account token.
+Service account tokens may be created via the Settings page for your Organization within Snyk as shown in <<settings3>>. For more information regarding Snyk service accounts, visit https://docs.snyk.io/features/integrations/managing-integrations/service-accounts[docs.snyk.io].
+
+:NOTE: Automated configuration of ECR integrations with Snyk require a paid Snyk subscription.
+
+[#settings2]
+.Snyk Account settings page
+image::../images/snyk_api_token_settings.png[Snyk Account API token,width=100%,height=100%]
+
+[#settings3]
+.Snyk organization service account settings
+image::../images/snyk_service_account_settings.png[Snyk Service Account settings,width=100%,height=100%]
+
 
 ==== Snyk Account Access
 
