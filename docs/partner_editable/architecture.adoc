@@ -1,32 +1,16 @@
-This Quick Start establishes cross-account access and enables {partner-product-short-name} integrations with AWS Lambda
-and Amazon Elastic Container Registry.
+This Quick Start establishes cross-account access and enables {partner-product-short-name} integrations with AWS Lambda and Amazon ECR.
 
 // Replace this example diagram with your own. Send us your source PowerPoint file. Be sure to follow our guidelines here : http://(we should include these points on our contributors giude)
 :xrefstyle: short
 [#architecture1]
-.Quick Start architecture for {partner-product-short-name} full integration on AWS
-image::../images/quickstart-snyk-security-full.png[Full Architecture,width=100%,height=100%]
+.Quick Start architecture for {partner-product-short-name} on AWS
+image::../images/snyk-security-architecture-diagram.png[Architecture,width=100%,height=100%]
 
-As shown in <<architecture1>>, the Quick Start for {partner-product-short-name} full integration sets up the following:
+As shown in <<architecture1>>, the Quick Start for {partner-product-short-name} Security sets up the following three deployment options:
 
-* One cross-account role for integration with AWS Lambda.
-* One cross-account role for integration with Amazon Elastic Container Registry.
-
-[#architecture2]
-.Quick Start architecture for {partner-product-short-name} with AWS Lambda
-image::../images/quickstart-snyk-security-lambda.png[Lambda Architecture,width=100%,height=100%]
-
-As shown in <<architecture2>>, the Quick Start for {partner-product-short-name} with AWS Lambda sets up the following:
-
-* One cross-account role for integration with AWS Lambda.
-
-[#architecture3]
-.Quick Start architecture for {partner-product-short-name} with Amazon Elastic Container Registry
-image::../images/quickstart-snyk-security-ecr.png[ECR Architecture,width=100%,height=100%]
-
-As shown in <<architecture3>>, the Quick Start for {partner-product-short-name} with Amazon Elastic Container Registry sets up the following:
-
-* One cross-account role for integration with Amazon Elastic Container Registry.
+* AWS Lambda and Amazon ECR full integration with {partner-product-short-name}, including two cross-account AWS Identity and Access Management (IAM) roles for each product. 
+* AWS Lambda integration with {partner-product-short-name}, including one cross-account IAM role. 
+* Amazon ECR integration with {partner-product-short-name}, including one cross-account IAM role.
 
 // Add bullet points for any additional components that are included in the deployment. Make sure that the additional components are also represented in the architecture diagram. End each bullet with a period.
 // * <describe any additional components>.
