@@ -1,23 +1,104 @@
-const https = require('https');
-const url = require('url')
-const request = require('request');
+const axios = require('axios');
+const cfnResponse = require('cfn-response-async');
 
-// The CloudFormation template provides a number of inputs which
-// are passed to the Lambda as environment variables. Set them
-// to variables to avoid typing process.env all the time.
-const orgID = process.env.orgId;
+// Inputs:
+//  - The CloudFormation template provides a number of inputs which
+//    are passed to the Lambda as environment variables. Set them
+//    to variables to avoid typing process.env all the time.
+const groupId = process.env.groupId;
+const sourceOrgId = process.env.orgId;
 const authToken = process.env.authToken;
+const orgPatternPrefix = process.env.orgPatternPrefix;
 const awsRegion = process.env.awsRegion;
 const awsRoleArn = process.env.awsRoleArn;
 
-// Set up some messages:
-const messages = {
-  integrationExists: `An existing ECR integration already exists for the provided Snyk organization: ${orgID}.`,
-  integrationCreated: `Successfully created ECR integration for Snyk organization ${orgID}`,
-  problemCreatingIntegration: `A problem occurred while attempting to create an ECR integration in Snyk for organization ${orgID}.`,
-  APIGetError: 'Error during GET request to Snyk API.',
-  APIPostError: 'Error during POST request to Snyk API.',
-  notCreateEvent: 'Skipping Snyk integration creation... This is not a CloudFormation CREATE event.'
+
+// Define request headers for both the Org and Integration functions.
+const requestHeaders = {
+  'Content-Type': 'application/json; charset=utf-8',
+  'Authorization': `token ${authToken}`
+}
+
+// Create a Snyk Organization.
+// - Set up an Axios request to query the Snyk API and return a Promise.
+// - Takes no parameters, but uses globally scoped variables.
+const createSnykOrg = () => {
+  // Generate a new Organization name.
+  const newOrgNameRand = Math.random().toString(36).slice(2);
+  const newOrgName = `${orgPatternPrefix}-${newOrgNameRand}`;
+  console.log('New Org being created: ', newOrgName);
+
+  // Set up the Request for creating a new Organization within Snyk.
+  const newOrgRequestOptions = {
+    method: 'post',
+    url: 'https://snyk.io/api/v1/org',
+    data: JSON.stringify({
+      name: newOrgName,
+      groupId: groupId,
+      sourceOrgId: sourceOrgId
+    }),
+    headers: requestHeaders
+  }
+
+  // Return a POST request to Snyk's API for creating a new
+  // Organization as a Promise.
+  return axios(newOrgRequestOptions)
+    .then(response => {
+      return response.data.id;
+    })
+    .then(finalResponse => {
+      console.log(`createSnykOrg finished with the following output: ${finalResponse}\nReturning it...`);
+      return finalResponse;
+    })
+    .catch(e => {
+      console.log(`Encountered error creating Organization within Snyk: ${e}`);
+      return { message: `Encountered error creating Organization within Snyk: ${e}` };
+    });
+}
+
+
+// Create Snyk Integration
+// - Set up an Axios request to query the Snyk API and return a Promise.
+// - Accepts an orgId as a string.
+const createSnykIntegration = orgId => {
+
+  const newECRIntegrationOptions = {
+    method: 'post',
+    url: `https://snyk.io/api/v1/org/${orgId}/integrations`,
+    data: JSON.stringify({
+      type: 'ecr',
+      credentials: {
+        region: awsRegion,
+        roleArn: awsRoleArn
+      }
+    }),
+    headers: requestHeaders
+  }
+
+  // Return a POST request to Snyk's API for creating a new
+  // Integration for the Organization matching orgId as a Promise.
+  return axios(newECRIntegrationOptions)
+    .then(response => {
+      const statusCode = response.status;
+      console.log(`The response from createOrgIntegration was: ${statusCode} - ${response}`);
+      if (statusCode === 201 || statusCode === 200) {
+        console.log('It worked, returning the object');
+        return {
+          integrationId: response.data.id,
+          newOrgId: orgId,
+          message: `Output:\nCreated new Snyk Organization: ${orgId}\nCreated new ECR Integration: ${response.data.id}`
+        };
+      }
+    })
+    .then(finalResponse => {
+      console.log(`createSnykIntegration finished with the following output: ${finalResponse}\nReturning it...`);
+      return finalResponse;
+    })
+    .catch(e => {
+      console.log(`Encountered error creating ECR integration within Snyk: ${e}`);
+      return { message: `Encountered error creating ECR integration within Snyk: ${e}` };
+    });
+
 }
 
 // Entrypoint function
@@ -25,128 +106,36 @@ const messages = {
 // The handler is the function within the Lambda Function that runs
 // when the Lambda is invoked. In the CloudFormation template(s) this
 // is specified in the Properties section of AddSnykIntegrationLambdaFunction.
-exports.handler = (event, context) => {
-  // Only act on Create.
-  if (event.RequestType === 'Create') {
-    try {
-      // First do a GET on the organization's integrations to see if there's an ECR
-      // integration already, if there is, we need to skip.
+exports.handler = async (event, context) => {
+  console.log(`Request Type: ${event.RequestType}`);
 
-      // request and axios are easier to chain off of than pure https, but it could be done.
-      request({
-        method: 'GET',
-        url: `https://snyk.io/api/v1/org/${orgID}/integrations`,
-        headers: {
-          'Content-Type': 'application/json; charset=utf-8',
-          'Authorization': `token ${authToken}`
-        }
-      }, (error, response, body) => {
-
-        if (!error) {
-          const data = response.body;
-          let existingECRIntegration = false;
-
-          if (data.ecr && data.ecr !== '') {
-            existingECRIntegration = true;
-          }
-
-          // If there is no existing ECR Integration for this organization within Snyk,
-          // it is safe to create one.
-          if (existingECRIntegration === false) {
-            request({
-              method: 'POST',
-              url: `https://snyk.io/api/v1/org/${orgID}/integrations`,
-              headers: {
-                'Content-Type': 'application/json; charset=utf-8',
-                'Authorization': `token ${authToken}`
-              },
-              body: "{  \"type\": \"ecr\",  \"credentials\": {    \"region\": \"" + awsRegion + "\",    \"roleArn\": \"" + awsRoleArn + "\"  }}"
-            }, (error, response, body) => {
-              console.log('response status', response.statusCode);
-              if (response.statusCode === 200 || response.statusCode === 201) {
-                console.log(messages.integrationCreated);
-                sendResponse(event, context, 'SUCCESS', JSON.parse(body));
-              } else {
-                let message;
-                response.statusCode === 409 ? message = messages.integrationExists : message = messages.problemCreatingIntegration;
-                sendResponse(event, context, 'FAILED', error !== null ? {message: error} : {message});
-              }
-            });
-          } else {
-            // The GET request returned an existing ECR integration with Snyk.
-            // Tell CloudFormation we've failed.
-            sendResponse(event, context, 'FAILED', {message: messages.integrationExists});
-          }
-
-        } else {
-          // An error was received from the GET request. Shut it down.
-          console.log(messages.APIGetError, error);
-          sendResponse(event, context, 'FAILED', {message: error});
-        }
-
-      });
-
-
-    } catch(e) {
-      console.log('Error during API call:\n', e);
-      sendResponse(event, context, 'FAILED', {message: e});
+  // When the CloudFormation event is 'Create', talk to the Snyk API
+  // and create the Organization and ECR Integration.
+  try {
+    switch (event.RequestType) {
+      case 'Create':
+        // Start the promise chain.
+        // First, create a new Organization, then use its ID and the
+        // other environment variables to create an ECR integration in
+        // Snyk for that Organization.
+        await createSnykOrg()
+          .then(async (newOrgId) => {
+            await createSnykIntegration(newOrgId)
+              .then(async (output) => {
+                // Tell CloudFormation we're done and that we succeeded.
+                await cfnResponse.send(event, context, cfnResponse.SUCCESS, output);
+              });
+          });
+        break;
+      case 'Update':
+        await cfnResponse.send(event, context, cfnResponse.SUCCESS);
+        break;
+      case 'Delete':
+        await cfnResponse.send(event, context, cfnResponse.SUCCESS);
+        break;
     }
-  } else {
-    // If CloudFormation isn't sending this function a Create event, succeed with
-    // a note saying the integration creation has been skipped.
-    // It may be a good idea to remove the integration that exists on a tear-down event.
-    sendResponse(event, context, 'SUCCESS', {message: messages.notCreateEvent});
+  } catch (e) {
+    // Tell CloudFormation we're done and that we failed.
+    cfnResponse.send(event, context, cfnResponse.FAILED, { message: `An error occurred: ${e}` });
   }
-}
-
-// Send response to pre-signed URL
-//
-// The pre-signed URL is part of the `event` object that CloudFormation
-// passes to the handler.
-const sendResponse = (event, context, responseStatus, responseData) => {
-
-  // Construct the response body that CF expects.
-  const responseBody = JSON.stringify({
-    Status: responseStatus,
-    Reason: `See the details in CloudWatch Log Stream: ${context.logStreamName}`,
-    PhysicalResourceId: context.logStreamName,
-    StackId: event.StackId,
-    RequestId: event.RequestId,
-    LogicalResourceId: event.LogicalResourceId,
-    Data: responseData
-  })
-
-  console.log('Response Body to reply to CloudFormation:\n', responseBody);
-
-  const parsedUrl = url.parse(event.ResponseURL);
-  const options = {
-    hostname: parsedUrl.hostname,
-    port: 443,
-    path: parsedUrl.path,
-    method: 'PUT',
-    headers: {
-      'content-type': '',
-      'content-length': responseBody.length
-    }
-  };
-
-  console.log('Sending response...\n');
-
-  // Construct the request using the above option values.
-  const request = https.request(options, (response) => {
-    console.log('Response to CloudFormation - STATUS:\n', response.statusCode);
-    console.log('Response to CloudFormation - HEADERS:\n', JSON.stringify(response.headers));
-    // Tell Lambda the function is done.
-    context.done();
-  });
-
-  request.on('error', (error) => {
-    console.log('Response to CloudFormation - Error:\n', error);
-    context.done();
-  });
-
-  // Write data to request body.
-  request.write(responseBody);
-  request.end();
-
 }
