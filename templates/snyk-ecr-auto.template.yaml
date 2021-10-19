@@ -13,7 +13,7 @@ Outputs:
     Value: 1.0.3
   NewSnykOrg:
     Description: Newly created Organization in your Snyk account
-    Value: !GetAtt 'CreateSnykIntegration.name'
+    Value: !GetAtt CreateSnykIntegration.newOrgId
 Metadata:
   QSLint:
     Exclusions: [W9006]
