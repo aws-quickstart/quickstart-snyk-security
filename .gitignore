@@ -34,3 +34,7 @@ fabric.properties
 .taskcat_overrides.yml
 taskcat_outputs/
 .taskcat/
+
+# Node
+node_modules/
+

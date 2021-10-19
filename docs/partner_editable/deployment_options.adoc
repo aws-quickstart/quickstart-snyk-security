@@ -1,0 +1,9 @@
+// Edit this placeholder text to accurately describe your architecture.
+
+This Quick Start provides three deployment options:
+
+* *Deploy {partner-product-short-name} Security full integration*. This option enables both Amazon ECR and AWS Lambda integrations for {partner-product-short-name} as a single deployment.
+* *Deploy {partner-product-short-name} Security integration with AWS Lambda*. This option enables only the AWS Lambda integration for {partner-product-short-name}.
+* *Deploy {partner-product-short-name} Security integration with Amazon ECR*. This option enables only the Amazon ECR integration for {partner-product-short-name}.
+
+The Quick Start provides separate templates for these options.
