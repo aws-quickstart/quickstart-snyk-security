@@ -1,6 +1,6 @@
 ---
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Snyk integration for Amazon Elastic Container Registry (ECR). (qs-1qqfgjgee)
+Description: Snyk integration for Amazon Elastic Container Registry (ECR). (qs-1sd1mkoa1)
 Outputs:
   AWSRegion:
     Description: The AWS Region for your Snyk ECR intgration
@@ -113,21 +113,8 @@ Resources:
             Action:
             - sts:AssumeRole
       Path: "/"
-      Policies:
-        - PolicyName: AmazonLambdaExecuteForSnyk
-          PolicyDocument:
-            Version: '2012-10-17'
-            Statement:
-              - Effect: Allow
-                Action:
-                  - logs:CreateLogGroup
-                  - logs:CreateLogStream
-                  - logs:PutLogEvents
-                Resource: arn:aws:logs:*:*:*
-              - Effect: Allow
-                Action:
-                  - lambda:InvokeFunction
-                Resource: '*'
+      ManagedPolicyArns:
+        - !Sub arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
   AddSnykIntegrationLambdaFunction:
     Type: AWS::Lambda::Function
     Properties:
