@@ -1,6 +1,6 @@
 ---
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Snyk integration for Amazon Elastic Container Registry (ECR). (qs-1qqfgjgee)
+Description: Snyk integration for Amazon Elastic Container Registry (ECR). (qs-1sd1mkoa1)
 Outputs:
   AWSRegion:
     Description: The AWS Region for your Snyk ECR intgration
