@@ -6,14 +6,14 @@
 :partner-product-short-name: Snyk
 // If there's no partner, comment partner-company-name and partner-contributors.
 :partner-company-name: Snyk
-:doc-month: December
-:doc-year: 2020
+:doc-month: October
+:doc-year: 2021
 // For the following two "contributor" attributes, if the partner agrees to include names in the byline, 
 // enter names for both partner-contributors and quickstart-contributors. 
 // Otherwise, delete all placeholder names: everything preceding "{partner-company-name}"  
 // and "{quickstart-team-name}". Use commas as shown in the placeholder text. 
 // Use the comma before "and" only when three or more names.
-:partner-contributors: Jay Yeras, {partner-company-name}
+:partner-contributors: Jay Yeras and Carwin Young, {partner-company-name}
 :quickstart-contributors: Dylan Owen, {quickstart-team-name}
 // For deployment_time, use minutes if deployment takes an hour or less, 
 // for example, 30 minutes or 60 minutes. 

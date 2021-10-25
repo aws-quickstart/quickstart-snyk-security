@@ -1,0 +1,15 @@
+{
+  "name": "addsnykintegration",
+  "version": "1.0.0",
+  "description": "An AWS Lambda function that adds an integration to an org via Snyk's API.",
+  "main": "lambda_function.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Carwin Young",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.23.0",
+    "cfn-response-async": "^1.0.0"
+  }
+}
