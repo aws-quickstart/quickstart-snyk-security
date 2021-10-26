@@ -120,7 +120,7 @@ Resources:
     Properties:
       Code:
         S3Bucket: !Ref QSS3BucketName
-        S3Key: !Sub '${QSS3KeyPrefix}lambda_functions/packages/AddSnykIntegration/lambda.zip'
+        S3Key: !Sub '${QSS3KeyPrefix}functions/packages/AddSnykIntegration/lambda.zip'
       Environment:
         Variables:
           awsRegion: !Ref QSS3BucketRegion

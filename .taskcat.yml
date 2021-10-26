@@ -1,8 +1,8 @@
 project:
   name: quickstart-snyk-security
   owner: partners@snyk.io
-  lambda_source_path: lambda_functions/source
-  lambda_zip_path: lambda_functions/packages
+  lambda_source_path: functions/source
+  lambda_zip_path: functions/packages
   s3_regional_buckets: true
 tests:
   # full:
