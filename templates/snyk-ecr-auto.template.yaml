@@ -60,6 +60,7 @@ Parameters:
     Type: String
     AllowedPattern: '[a-z0-9-]{36}'
     MinLength: 1
+    NoEcho: True
   SnykOrgPatternPrefix:
     Description: "Provide a string to use as a prefix for the Snyk Organization that will be created within your account."
     Type: String
