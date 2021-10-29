@@ -6,7 +6,6 @@ const cfnResponse = require('cfn-response-async');
 //    are passed to the Lambda as environment variables. Set them
 //    to variables to avoid typing process.env all the time.
 const groupId = process.env.groupId;
-const sourceOrgId = process.env.orgId;
 const authToken = process.env.authToken;
 const orgPatternPrefix = process.env.orgPatternPrefix;
 const awsRegion = process.env.awsRegion;
@@ -35,7 +34,6 @@ const createSnykOrg = () => {
     data: JSON.stringify({
       name: newOrgName,
       groupId: groupId,
-      sourceOrgId: sourceOrgId
     }),
     headers: requestHeaders
   }
