@@ -95,6 +95,10 @@ Parameters:
     Description: The ARN of the ECR resource(s). List multiple resource ARN's separated by a comma.
     Type: CommaDelimitedList
     Default: '*'
+Conditions:
+  UsingDefaultBucket: !Equals
+    - !Ref QSS3BucketName
+    - 'aws-quickstart'
 Resources:
   LambdaExecutionRole:
     Type: AWS::IAM::Role
@@ -115,7 +119,7 @@ Resources:
     Type: AWS::Lambda::Function
     Properties:
       Code:
-        S3Bucket: !Ref QSS3BucketName
+        S3Bucket: !If [UsingDefaultBucket, !Sub '${QSS3BucketName}-${AWS::Region}', !Ref QSS3BucketName]
         S3Key: !Sub '${QSS3KeyPrefix}functions/packages/AddSnykIntegration/lambda.zip'
       Environment:
         Variables:
