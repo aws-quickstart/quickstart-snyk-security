@@ -11,8 +11,8 @@ Regardless of which Quick Start option you choose, log in to your https://app.sn
 .Snyk Settings page
 image::../images/snyk_org_id_settings.png[Snyk Organization ID,width=100%,height=100%]
 
-===== Control Tower deployments
-If you are deploying Snyk Security through an AWS Control Tower-managed multiaccount environment (landing zone), obtain an API authentication token. This token is used to automate the creation of ECR integrations within Snyk.
+===== Automated configuration for Amazon ECR
+If you are deploying Snyk Security via the automated configuration option for Amazon ECR, obtain an API authentication token. This token is used to automate the creation of organizations and ECR integrations within Snyk.
 
 You may use either your personal account token, available via your Snyk account's settings page as shown in <<settings2>>,
 or a Service account token.
