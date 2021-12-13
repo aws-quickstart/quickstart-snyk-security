@@ -37,6 +37,9 @@ Each deployment takes about {deployment_time} to complete.
 ^|https://fwd.aws/Nx5kQ[Deploy {partner-product-short-name} Security with Amazon ECR^]
 ^|https://fwd.aws/aPjng[View template^]
 
+^|https://fwd.aws/Nx5kQ[Deploy {partner-product-short-name} Security with Amazon ECR and automated Snyk integration^]
+^|https://fwd.aws/aPjng[View template^]
+
 ^|https://fwd.aws/8rKEy[Deploy {partner-product-short-name} Security with AWS Lambda^]
 ^|https://fwd.aws/JXd7k[View template^]
 |===
