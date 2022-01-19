@@ -1,10 +1,10 @@
 // Edit this placeholder text to accurately describe your architecture.
 
-This Quick Start provides three deployment options:
+This Quick Start provides the following deployment options:
 
-* *Deploy {partner-product-short-name} Security full integration*. This option enables both Amazon ECR and AWS Lambda integrations for {partner-product-short-name} as a single deployment.
-* *Deploy {partner-product-short-name} Security integration with AWS Lambda*. This option enables only the AWS Lambda integration for {partner-product-short-name}.
-* *Deploy {partner-product-short-name} Security integration with Amazon ECR*. This option enables only the Amazon ECR integration for {partner-product-short-name}.
-* *Deploy {partner-product-short-name} Security integration with Amazon ECR and automated Snyk integration*. This option enables only the Amazon ECR integration for {partner-product-short-name}. Additionally, this option creates a new organization within a Snyk account preconfigured with an Amazon ECR integration using the deployed resources.
+* *Deploy {partner-product-short-name} Security full integration*. This option deploys both Amazon ECR and AWS Lambda integrations for {partner-product-short-name} as a single deployment.
+* *Deploy {partner-product-short-name} Security integration with AWS Lambda*. This option deploys only the AWS Lambda integration for {partner-product-short-name}.
+* *Deploy {partner-product-short-name} Security integration with Amazon ECR*. This option deploys only the Amazon ECR integration for {partner-product-short-name}.
+* *Deploy {partner-product-short-name} Security integration with Amazon ECR and automated Snyk integration*. This option deploys the Amazon ECR integration for {partner-product-short-name}. It creates a new organization within a Snyk account that's preconfigured with an Amazon ECR integration.
 
-The Quick Start provides separate templates for these options.
+This Quick Start provides separate templates for each option.

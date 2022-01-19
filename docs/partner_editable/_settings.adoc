@@ -1,13 +1,13 @@
 // Do not change this first attribute. Do change the others.
-:quickstart-team-name: AWS Quick Start team
+:quickstart-team-name: AWS Infrastructure & Automation team
 :quickstart-project-name: quickstart-snyk-security
 :partner-product-name: Snyk Developer-First Security
 // For the following attribute, if you have no short name, enter the same name as partner-product-name.
 :partner-product-short-name: Snyk
 // If there's no partner, comment partner-company-name and partner-contributors.
 :partner-company-name: Snyk
-:doc-month: November
-:doc-year: 2021
+:doc-month: January
+:doc-year: 2022
 // For the following two "contributor" attributes, if the partner agrees to include names in the byline, 
 // enter names for both partner-contributors and quickstart-contributors. 
 // Otherwise, delete all placeholder names: everything preceding "{partner-company-name}"  

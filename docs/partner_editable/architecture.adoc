@@ -1,4 +1,4 @@
-This Quick Start establishes cross-account access and enables {partner-product-short-name} integrations with AWS Lambda and Amazon ECR.
+This Quick Start establishes cross-account access and integrates {partner-product-short-name} with AWS Lambda and Amazon ECR.
 
 // Replace this example diagram with your own. Send us your source PowerPoint file. Be sure to follow our guidelines here : http://(we should include these points on our contributors giude)
 :xrefstyle: short
@@ -6,7 +6,7 @@ This Quick Start establishes cross-account access and enables {partner-product-s
 .Quick Start architecture for {partner-product-short-name} on AWS
 image::../images/snyk-security-architecture-diagram.png[Architecture,width=100%,height=100%,max-width=700px]
 
-As shown in <<architecture1>>, the Quick Start for {partner-product-short-name} Security sets up the following three deployment options:
+As shown in <<architecture1>>, this Quick Start for {partner-product-short-name} Security provides the following deployment options:
 
 * AWS Lambda and Amazon ECR full integration with {partner-product-short-name}, including two cross-account AWS Identity and Access Management (IAM) roles for each product. 
 * AWS Lambda integration with {partner-product-short-name}, including one cross-account IAM role. 
