@@ -1,25 +1,25 @@
 ---
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Snyk integration for AWS services. (qs-1qm9kh0j6)
+Description: Snyk integration for AWS. (qs-1qm9kh0j6)
 Outputs:
   AWSRegion:
-    Description: The AWS Region for your Snyk ECR intgration
+    Description: AWS Region for your Snyk Amazon ECR intgration.
     Value: !Sub '${AWS::Region}'
   SnykECRIntegrationRole:
-    Description: Snyk ECR Integration Role ARN
+    Description: Snyk Amazon ECR integration role ARN.
     Value: !GetAtt 'ECRIntegrationStack.Outputs.SnykECRIntegrationRole'
   SnykLambdaIntegrationRole:
-    Description: Snyk Lambda Integration Role ARN
+    Description: Snyk AWS Lambda integration role ARN.
     Value: !GetAtt 'LambdaIntegrationStack.Outputs.SnykLambdaIntegrationRole'
   Version:
-    Description: Snyk AWS Integrations Version
+    Description: Snyk AWS integrations version.
     Value: 1.0.2
 Metadata:
   cfn-lint: { config: { ignore_checks: [ W9901 ] } }
   QSLint:
     Exclusions: [W9006]
   QuickStartDocumentation:
-    EntrypointName: "Snyk integration for AWS services"
+    EntrypointName: "Snyk integration for AWS."
     Order: "1"
   LICENSE: Apache License, Version 2.0
   AWS::CloudFormation::Interface:
@@ -39,7 +39,7 @@ Metadata:
       SnykExternalId:
         default: Snyk organization ID
       SnykAWSAccountNumber:
-        default: Snyk AWS Account ID
+        default: Snyk AWS account ID
       QSS3BucketName:
         default: Quick Start S3 bucket name
       QSS3BucketRegion:
@@ -53,30 +53,30 @@ Parameters:
     AllowedPattern: '[a-z0-9-]{36}'
     MinLength: 1
   SnykAWSAccountNumber:
-    Description: "Snyk's AWS Account ID which assumes a role in your account. Please see the deployment guide 'Technical requirements | Snyk Account Access' for this Account ID"
+    Description: "Snyk's AWS account ID that assumes a role in your account. See the deployment guide 'Technical requirements | Snyk account access' for this account ID."
     Type: String
   QSS3BucketName:
     AllowedPattern: ^[0-9a-zA-Z]+([0-9a-zA-Z-]*[0-9a-zA-Z])*$
     ConstraintDescription:
-     The Quick Start bucket name can include numbers, lowercase
+     Quick Start bucket name can include numbers, lowercase
       letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen
       (-).
     Default: aws-quickstart
     Description:
-      Name of the S3 bucket for your copy of the Quick Start assets. Keep the default name unless you are customizing the template. Changing the name updates code references to point to a new Quick Start location. This name can include numbers, lowercase letters, uppercase letters, and hyphens, but do not start or end with a hyphen (-). See https://aws-quickstart.github.io/option1.html.
+      Name of the S3 bucket for your Quick Start assets. Keep the default name unless you are customizing the template. Changing the name updates code references to point to a new Quick Start location. This name can include numbers, lowercase letters, uppercase letters, and hyphens, but it cannot start or end with a hyphen (-). For more information, see https://aws-quickstart.github.io/option1.html.
     Type: String
   QSS3BucketRegion:
     Default: 'us-east-1'
-    Description: 'AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. Keep the default Region unless you are customizing the template. Changing this Region updates code references to point to a new Quick Start location. When using your own bucket, specify the Region. See https://aws-quickstart.github.io/option1.html.'
+    Description: 'AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. Keep the default Region unless you are customizing the template. Changing this Region updates code references to point to a new Quick Start location. When using your own bucket, specify the Region. For more information, see https://aws-quickstart.github.io/option1.html.'
     Type: String
   QSS3KeyPrefix:
     AllowedPattern: ^[0-9a-zA-Z-/.]*$
     ConstraintDescription:
-      The Quick Start S3 key prefix can include numbers, lowercase letters,
-      uppercase letters, hyphens (-), and forward slash (/).
+      Quick Start S3 key prefix can include numbers, lowercase letters,
+      uppercase letters, hyphens (-), and forward slashes (/).
     Default: quickstart-snyk-security/
     Description:
-      S3 key prefix that is used to simulate a directory for your copy of the Quick Start assets. Keep the default prefix unless you are customizing the template. Changing this prefix updates code references to point to a new Quick Start location. This prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slashes (/). See https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html and https://aws-quickstart.github.io/option1.html.
+      S3 key prefix used to simulate a directory for your Quick Start assets. Keep the default prefix unless you are customizing the template. Changing this prefix updates code references to point to a new Quick Start location. This prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slashes (/). For more information, see https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html and https://aws-quickstart.github.io/option1.html.
     Type: String
 Conditions:
   UsingDefaultBucket: !Equals
