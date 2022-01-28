@@ -29,7 +29,7 @@ For more information, see https://docs.aws.amazon.com/AWSCloudFormation/latest/U
 
 * https://docs.aws.amazon.com/cloudformation/[AWS CloudFormation^]
 * https://docs.aws.amazon.com/iam/[IAM^]
-* https://aws.amazon.com/ecr/[Amazon Elastic Container Registry (ECR)^]
+* https://aws.amazon.com/ecr/[Amazon ECR^]
 * https://aws.amazon.com/lambda/[AWS Lambda^]
 
 === Snyk documentation
@@ -38,7 +38,7 @@ For more information, see https://docs.aws.amazon.com/AWSCloudFormation/latest/U
 
 === Related Quick Start reference deployments
 
-* https://aws.amazon.com/quickstart/?quickstart-all.sort-by=item.additionalFields.updateDate&quickstart-all.sort-order=desc&awsf.quickstart-homepage-filter=categories%23containers[AWS Container Quick Start home page^]
+* https://aws.amazon.com/quickstart/?quickstart-all.sort-by=item.additionalFields.updateDate&quickstart-all.sort-order=desc&awsf.quickstart-homepage-filter=categories%23containers&solutions-all.sort-by=item.additionalFields.sortDate&solutions-all.sort-order=desc&awsf.filter-content-type=content-type%23quick-start&awsf.filter-tech-category=tech-category%23containers&awsf.filter-industry=*all[Container AWS Quick Starts^]
 
 == Troubleshooting
 
