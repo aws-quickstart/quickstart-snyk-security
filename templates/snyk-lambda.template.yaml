@@ -3,16 +3,16 @@ AWSTemplateFormatVersion: '2010-09-09'
 Description: Snyk integration for AWS Lambda. (qs-1qqfgjgbc)
 Outputs:
   SnykLambdaIntegrationRole:
-    Description: Snyk Lambda Integration Role ARN
+    Description: Snyk AWS Lambda integration role ARN.
     Value: !GetAtt 'SnykLambdaIntegrationRole.Arn'
   Version:
-    Description: Snyk Lambda Integration Version
+    Description: Snyk AWS Lambda integration version.
     Value: 1.0.2
 Metadata:
   QSLint:
     Exclusions: [W9006]
   QuickStartDocumentation:
-    EntrypointName: "Snyk integration for AWS Lambda"
+    EntrypointName: "Snyk integration for AWS Lambda."
     Order: "2"
   LICENSE: Apache License, Version 2.0
   AWS::CloudFormation::Interface:
@@ -27,9 +27,9 @@ Metadata:
       SnykExternalId:
         default: Snyk organization ID
       SnykAWSAccountNumber:
-        default: Snyk AWS Account ID
+        default: Snyk AWS account ID
       LambdaResourceARN:
-        default: Lambda Resource ARN
+        default: AWS Lambda resource ARN
 Parameters:
   SnykExternalId:
     Description: Locate the organization ID by logging in to https://app.snyk.io and navigating to Settings.
@@ -37,10 +37,10 @@ Parameters:
     AllowedPattern: '[a-z0-9-]{36}'
     MinLength: 1
   SnykAWSAccountNumber:
-    Description: "Snyk's AWS Account ID which assumes a role in your account. Please see the deployment guide 'Technical requirements | Snyk Account Access' for this Account ID"
+    Description: "Snyk's AWS account ID that assumes a role in your account. See the deployment guide 'Technical requirements | Snyk account access' for this account ID."
     Type: String
   LambdaResourceARN:
-    Description: The ARN of the Lambda resource(s). List multiple resource ARN's separated by a comma.
+    Description: "ARN of the AWS Lambda resource(s). Use commas to separate multiple resource ARN's."
     Type: CommaDelimitedList
     Default: '*'
 Resources:

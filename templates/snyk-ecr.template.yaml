@@ -1,21 +1,21 @@
 ---
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Snyk integration for Amazon Elastic Container Registry (ECR). (qs-1qqfgjgee)
+Description: Snyk integration for Amazon Elastic Container Registry (Amazon ECR). (qs-1qqfgjgee)
 Outputs:
   AWSRegion:
-    Description: The AWS Region for your Snyk ECR intgration
+    Description: AWS Region for your Snyk ECR intgration.
     Value: !Sub '${AWS::Region}'
   SnykECRIntegrationRole:
-    Description: Snyk ECR Integration Role ARN
+    Description: Snyk Amazon ECR integration Role ARN
     Value: !GetAtt 'SnykECRIntegrationRole.Arn'
   Version:
-    Description: Snyk ECR Integration Version
+    Description: Snyk Amazon ECR integration version.
     Value: 1.0.2
 Metadata:
   QSLint:
     Exclusions: [W9006]
   QuickStartDocumentation:
-    EntrypointName: "Snyk integration for Amazon ECR"
+    EntrypointName: "Snyk integration for Amazon ECR."
     Order: "3"
   LICENSE: Apache License, Version 2.0
   AWS::CloudFormation::Interface:
@@ -30,9 +30,9 @@ Metadata:
       SnykExternalId:
         default: Snyk organization ID
       SnykAWSAccountNumber:
-        default: Snyk AWS Account ID
+        default: Snyk AWS account ID
       ECRResourceARN:
-        default: ECR Resource ARN
+        default: Amazon ECR resource ARN
 Parameters:
   SnykExternalId:
     Description: Locate the organization ID by logging in to https://app.snyk.io and navigating to Settings.
@@ -40,10 +40,10 @@ Parameters:
     AllowedPattern: '[a-z0-9-]{36}'
     MinLength: 1
   SnykAWSAccountNumber:
-    Description: "Snyk's AWS Account ID which assumes a role in your account. Please see the deployment guide 'Technical requirements | Snyk Account Access' for this Account ID"
+    Description: "Snyk's AWS account ID that assumes a role in your account. See the deployment guide 'Technical requirements | Snyk account access' for this account ID."
     Type: String
   ECRResourceARN:
-    Description: The ARN of the ECR resource(s). List multiple resource ARN's separated by a comma.
+    Description: "ARN of the Amazon ECR resource(s). Use commas to separate multiple resource ARN's."
     Type: CommaDelimitedList
     Default: '*'
 Resources:
