@@ -3,6 +3,6 @@
 // Avoid borrowing text from third-party websites (copying text from AWS service documentation is fine). Also, avoid marketing-speak, focusing instead on the technical aspect.
 
 This guide provides instructions for deploying {partner-product-short-name} on the AWS Cloud. 
-Snyk continuously monitors your applications to identify and fix vulnerabilities that utilize open-source software, serverless environments, and containers.
+Snyk continuously monitors your applications to identify and fix vulnerabilities that use open-source software, serverless environments, and containers.
 
 This Quick Start is for developers, DevOps, security teams, and others within an organization that build, deploy, and maintain serverless applications or container images that use AWS Lambda and Amazon Elastic Container Registry (Amazon ECR).

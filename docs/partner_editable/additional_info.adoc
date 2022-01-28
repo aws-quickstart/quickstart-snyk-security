@@ -5,8 +5,8 @@
 // If steps are required to test the deployment, add them here. If not, remove the heading
 
 === Snyk integration with Amazon ECR
-Deploying the Snyk Security Quick Start for Amazon Elastic Container Registry (Amazon ECR) creates
-an integration for your Snyk organization. After it's deployed, you can
+Deploying the Snyk security Quick Start for Amazon Elastic Container Registry (Amazon ECR) creates
+an integration for your Snyk organization. After it deploys, you can
 add repositories for Snyk to scan by following these steps:
 
 . Log in to your Snyk account.
@@ -14,9 +14,9 @@ add repositories for Snyk to scan by following these steps:
 . Select either single or multiple images.
 . Choose *Add selected repositories*.
 
-For more information, see https://support.snyk.io/hc/en-us/articles/360003947077-Amazon-Elastic-Container-Registry-ECR-add-images-to-Snyk[Amazon Elastic Container Registry (ECR): add images to Snyk^].
+For more information, see https://support.snyk.io/hc/en-us/articles/360003947077-Amazon-Elastic-Container-Registry-ECR-add-images-to-Snyk[Amazon ECR: add images to Snyk^].
 
-NOTE: Both integration options connect the deployed Amazon ECR instance to the Snyk organization provided in the Quick Start parameters. Deployment may fail, however, if your chosen Snyk organization has an existing ECR integration or if the authentication token you provide in the parameters has insufficient access privileges.
+NOTE: Both integration options connect the deployed Amazon ECR instance to the Snyk organization provided in the Quick Start parameters. Deployment may fail, however, if your chosen Snyk organization has an existing ECR integration or if the authentication token you provide in the parameters has insufficient permissions.
 
 === Snyk integration with AWS Lambda
 . Log in to your Snyk account.
@@ -24,7 +24,7 @@ NOTE: Both integration options connect the deployed Amazon ECR instance to the S
 . Select the relevant functions.
 . Choose *Add selected functions*.
 
-NOTE: Snyk supports integrating with AWS Lambda for Node, Ruby, and Java projects.
+NOTE: Snyk supports integrating with AWS Lambda for Node.js, Ruby, and Java projects.
 
 For more information, see https://support.snyk.io/hc/en-us/articles/360004002418-AWS-Lambda-integration[AWS Lambda integration^].
 
