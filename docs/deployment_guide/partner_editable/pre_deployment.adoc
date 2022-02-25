@@ -17,7 +17,7 @@ image::../docs/deployment_guide/images/snyk_org_id_settings.png[Snyk Organizatio
 === Automated configuration for Amazon ECR
 If you deploy Snyk security using the automated configuration option for Amazon ECR, obtain an API authentication token. The token automates the creation of organizations and ECR integrations within Snyk.
 
-You may use either your personal account token, available through your Snyk account's settings page, as shown in <<settings2>>, or a service-account token. Service-account tokens can be generated through the **Settings** page for your organization within Snyk, as shown in <<settings3>>. For more information, see https://docs.snyk.io/features/integrations/managing-integrations/service-accounts[Service accounts^].
+You may use either your personal account token, available through your Snyk account's settings page, as shown in <<settings2>>, or a service-account token. Service-account tokens can be generated through the **Settings** page for your organization within Snyk, as shown in <<settings3>>. For more information, refer to https://docs.snyk.io/features/integrations/managing-integrations/service-accounts[Service accounts^].
 
 NOTE: An automated integration of Amazon ECR with Snyk requires a paid Snyk subscription.
 
@@ -32,4 +32,4 @@ image::../docs/deployment_guide/images/snyk_service_account_settings.png[Snyk Se
 
 === Snyk account access
 
-A Snyk account is required in order for created roles to function. Note that this deployment grants Snyk the ability to assume an IAM role in your account. To continue, use `198361731867` as the account ID for the *Snyk AWS account ID* parameter
+For created roles to function, a Snyk account is required. Note that this deployment grants Snyk the ability to assume an IAM role in your account. To continue, use `198361731867` as the account ID for the *Snyk AWS account ID* parameter.
