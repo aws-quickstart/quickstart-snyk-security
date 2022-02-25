@@ -2,4 +2,4 @@
 
 This Quick Start is available to Snyk customers of all pricing plans. If you're not a Snyk customer, you can register for a free account from https://app.snyk.io/login?utm_campaign=Snyk-Security-QS&utm_medium=Partner&utm_source=AWS[Snyk^]. For information about payment plans (required for Amazon ECR on AWS Control Tower option), refer to https://aws.amazon.com/marketplace/pp/prodview-nw2naibu6b2ks?sr=0-1&ref_=beagle&applicationId=AWSMPContessa[Snyk: Developer Security Platform (Business and Enterprise Tiers)^].
 
-There is no cost to use this Quick Start, but you will be billed for any AWS resources it deploys. For more information, refer to the http://general-content-file[AWS Quick Start General Content Guide^].
+There is no cost to use this Quick Start, but you will be billed for any AWS resources it deploys. For more information, refer to the https://fwd.aws/rA69w?[AWS Quick Start General Information Guide^].

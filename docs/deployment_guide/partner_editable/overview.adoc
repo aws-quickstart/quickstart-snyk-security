@@ -1,4 +1,4 @@
-This guide provides instructions for deploying {partner-product-short-name} on the AWS Cloud. If you are unfamiliar with AWS Quick Starts, refer to the https://aws-ia.github.io/content/qs_info.html[AWS Quick Start General Content Guide^].
+This guide provides instructions for deploying {partner-product-short-name} on the AWS Cloud. If you are unfamiliar with AWS Quick Starts, refer to the https://fwd.aws/rA69w?[AWS Quick Start General Information Guide^].
 
 // This deployment guide covers the steps necessary to deploy the Quick Start. For more advanced information on the product, troubleshooting, or additional functionality, refer to the https://{quickstart-github-org}.github.io/{quickstart-project-name}/operational/index.html[Operational guide].
 
