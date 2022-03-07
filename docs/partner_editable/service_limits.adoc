@@ -1,8 +1,0 @@
-// Replace the <n> in each row to specify the number of resources used in this deployment. Remove the rows for resources that aren’t used.
-|===
-|Resource |This deployment uses
-
-// Space needed to maintain table headers
-|https://docs.aws.amazon.com/general/latest/gr/lambda-service.html[Amazon ECR^] |0
-|https://docs.aws.amazon.com/general/latest/gr/lambda-service.html[AWS Lambda] |0
-|===
