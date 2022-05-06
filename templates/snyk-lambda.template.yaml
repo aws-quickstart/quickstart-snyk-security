@@ -39,6 +39,7 @@ Parameters:
   SnykAWSAccountNumber:
     Description: "Snyk's AWS Account ID which assumes a role in your account. Please see the deployment guide 'Technical requirements | Snyk Account Access' for this Account ID"
     Type: String
+    Default: "198361731867"
   LambdaResourceARN:
     Description: The ARN of the Lambda resource(s). List multiple resource ARN's separated by a comma.
     Type: CommaDelimitedList
