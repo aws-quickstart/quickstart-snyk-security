@@ -33,9 +33,8 @@ Metadata:
 Parameters:
   SnykExternalId:
     Description: Locate the organization ID by logging in to https://app.snyk.io and navigating to Settings.
-    Type: String
-    AllowedPattern: '[a-z0-9-]{36}'
-    MinLength: 1
+    Type: CommaDelimitedList
+    Default: "abcd1234-abcd-1234-abcd-1234abcd1234, abcd1234-abcd-1234-abcd-1234abcd1234"
   SnykAWSAccountNumber:
     Description: "Snyk's AWS Account ID which assumes a role in your account. Please see the deployment guide 'Technical requirements | Snyk Account Access' for this Account ID"
     Type: String
