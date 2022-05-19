@@ -37,7 +37,7 @@ Metadata:
           - QSS3KeyPrefix
     ParameterLabels:
       SnykExternalId:
-        default: Snyk organization ID
+        default: Snyk organization ID(s)
       SnykAWSAccountNumber:
         default: Snyk AWS Account ID
       QSS3BucketName:
@@ -48,9 +48,8 @@ Metadata:
         default: Quick Start S3 key prefix
 Parameters:
   SnykExternalId:
-    Description: Locate the organization ID by logging in to https://app.snyk.io and navigating to Settings.
+    Description: Locate the organization ID by logging in to https://app.snyk.io and navigating to Settings. To integrate with multiple organizations, separate each ID with a comma.
     Type: CommaDelimitedList
-    Default: "abcd1234-abcd-1234-abcd-1234abcd1234, abcd1234-abcd-1234-abcd-1234abcd1234"
   SnykAWSAccountNumber:
     Description: "Snyk's AWS Account ID which assumes a role in your account. Please see the deployment guide 'Technical requirements | Snyk Account Access' for this Account ID"
     Type: String
