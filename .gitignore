@@ -34,6 +34,11 @@ fabric.properties
 .taskcat_overrides.yml
 taskcat_outputs/
 .taskcat/
+functions/packages/
+lambda.zip
+
+# Snyk
+.dccache
 
 # Node
 node_modules/
