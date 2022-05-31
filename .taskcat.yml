@@ -10,7 +10,6 @@ tests:
       QSS3BucketName: $[taskcat_autobucket]
       QSS3BucketRegion: $[taskcat_current_region]
       SnykExternalId: abcd1234-abcd-1234-abcd-1234abcd1234
-      SnykAWSAccountNumber: 198361731867
     regions:
       - us-east-1
     template: templates/snyk-full.template.yaml
