@@ -25,17 +25,15 @@ Metadata:
           - LambdaResourceARN
     ParameterLabels:
       SnykExternalId:
-        default: Snyk organization ID
+        default: Snyk organization ID(s)
       SnykAWSAccountNumber:
         default: Snyk AWS Account ID
       LambdaResourceARN:
         default: Lambda Resource ARN
 Parameters:
   SnykExternalId:
-    Description: Locate the organization ID by logging in to https://app.snyk.io and navigating to Settings.
-    Type: String
-    AllowedPattern: '[a-z0-9-]{36}'
-    MinLength: 1
+    Description: Locate the organization ID by logging in to https://app.snyk.io and navigating to Settings. To integrate with multiple organizations, separate each ID with a comma.
+    Type: CommaDelimitedList
   SnykAWSAccountNumber:
     Description: "Snyk's AWS Account ID which assumes a role in your account. Please see the deployment guide 'Technical requirements | Snyk Account Access' for this Account ID"
     Type: String
