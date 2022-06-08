@@ -37,7 +37,7 @@ Metadata:
           - QSS3KeyPrefix
     ParameterLabels:
       SnykExternalId:
-        default: Snyk organization ID
+        default: Snyk organization ID(s)
       SnykAWSAccountNumber:
         default: Snyk AWS Account ID
       QSS3BucketName:
@@ -48,10 +48,8 @@ Metadata:
         default: Quick Start S3 key prefix
 Parameters:
   SnykExternalId:
-    Description: Locate the organization ID by logging in to https://app.snyk.io and navigating to Settings.
-    Type: String
-    AllowedPattern: '[a-z0-9-]{36}'
-    MinLength: 1
+    Description: Locate the organization ID by logging in to https://app.snyk.io and navigating to Settings. To integrate with multiple organizations, separate each ID with a comma.
+    Type: CommaDelimitedList
   SnykAWSAccountNumber:
     Description: "Snyk's AWS Account ID which assumes a role in your account. Please see the deployment guide 'Technical requirements | Snyk Account Access' for this Account ID"
     Type: String
@@ -87,7 +85,7 @@ Resources:
     Type: 'AWS::CloudFormation::Stack'
     Properties:
       Parameters:
-        SnykExternalId: !Ref 'SnykExternalId'
+        SnykExternalId: !Join [",", !Ref 'SnykExternalId']
         SnykAWSAccountNumber: !Ref 'SnykAWSAccountNumber'
       TemplateURL: !Sub
         - 'https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}templates/snyk-ecr.template.yaml'
@@ -103,7 +101,7 @@ Resources:
     Type: 'AWS::CloudFormation::Stack'
     Properties:
       Parameters:
-        SnykExternalId: !Ref 'SnykExternalId'
+        SnykExternalId: !Join [",", !Ref 'SnykExternalId']
         SnykAWSAccountNumber: !Ref 'SnykAWSAccountNumber'
       TemplateURL: !Sub
         - 'https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}templates/snyk-lambda.template.yaml'
