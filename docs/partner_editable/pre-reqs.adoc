@@ -14,5 +14,8 @@ As shown in the <<settings1>>, log in to your https://app.snyk.io/[Snyk account]
 
 ==== Snyk Account Access
 
-The Snyk AWS Account is required to assume a role in your account in order to function. Please be aware that this deployment grants Snyk the ability to assume an IAM role in your account. 
-In order to continue, please use `198361731867` as the account ID for the *Snyk AWS Account ID* parameter
+The Snyk AWS Account is required to assume a role in your account in order to function. Please be aware that this deployment grants Snyk the ability to assume an IAM role in your account.
+In order to continue, please use the *Snyk AWS Account ID* specified on the Snyk website when setting up the AWS lambda integration (Integrations -> AWS Lambda).
+[#settings2]
+.Snyk AWS Account ID
+image::../images/snyk_aws_account_id.png[Snyk AWS account id,width=100%,height=100%]
