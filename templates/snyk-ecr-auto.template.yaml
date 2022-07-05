@@ -1,18 +1,18 @@
 ---
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Snyk integration for Amazon Elastic Container Registry (ECR). (qs-1sd1mkoa1)
+Description: Snyk integration for Amazon Elastic Container Registry (Amazon ECR). (qs-1sd1mkoa1)
 Outputs:
   AWSRegion:
-    Description: The AWS Region for your Snyk ECR intgration
+    Description: AWS Region for your Snyk integration.
     Value: !Sub '${AWS::Region}'
   SnykECRIntegrationRole:
-    Description: Snyk ECR Integration Role ARN
+    Description: Amazon Resource Name (ARN) role for your Snyk integration.
     Value: !GetAtt 'SnykECRIntegrationRole.Arn'
   Version:
-    Description: Snyk ECR Integration Version
+    Description: Snyk ECR integration version
     Value: 1.0.3
   NewSnykOrg:
-    Description: Newly created Organization in your Snyk account
+    Description: Specify your organization name.
     Value: !GetAtt CreateSnykIntegration.newOrgId
 Metadata:
   QSLint:
@@ -32,67 +32,58 @@ Metadata:
           - ECRResourceARN
     ParameterLabels:
       SnykGroupId:
-        default: Snyk Group ID to associate with new Org
+        default: Snyk group ID to associate with your new organization
       SnykAuthToken:
-        default: Snyk API authentication token with Snyk Group admin permission, preferably a service account token
+        default: Snyk API authentication token for the administrator (preferably a service-account token)
       SnykOrgPatternPrefix:
-        default: Snyk Organization name prefix
+        default: Snyk organization name prefix
       SnykAWSAccountNumber:
-        default: Snyk AWS Account ID
+        default: Snyk AWS account ID
       ECRResourceARN:
-        default: ECR Resource ARN
+        default: Amazon ECR ARN
 Parameters:
   SnykGroupId:
-    Description: "Locate the Group ID by logging in to https://app.snyk.io and navigating to Settings in the Group overview dashboard."
+    Description: "Enter your Snyk group ID. To locate your group ID, log in to https://app.snyk.io, and navigate to account settings."
     Type: String
     AllowedPattern: '[a-z0-9-]{36}'
     MinLength: 1
   SnykAuthToken:
     Description: >
-      Locate your account's API token by logging in to https://app.snyk.io and navigating to Account Settings.
-      It is recommended that you use a Service Account token instead of your personal API Token. Whichever you choose,
-      the token must have Group administrator permission. Refer to the integration guide for details.
+      Enter you account's API token. To locate your token, log in to https://app.snyk.io, and navigate to account settings. We recommend that you use a service-account token, not a personal API token. The token must have group-administrator permissions.
     Type: String
     AllowedPattern: '[a-z0-9-]{36}'
     MinLength: 1
     NoEcho: True
   SnykOrgPatternPrefix:
-    Description: "Provide a string to use as a prefix for the new organization that will be created within your Snyk group."
+    Description: "Provide a prefix string for your organization's Snyk group."
     Type: String
     AllowedPattern: ^[0-9a-zA-z]*
     MinLength: 1
   SnykAWSAccountNumber:
-    Description: "Snyk's AWS Account ID which assumes a role in your account. Please see the deployment guide 'Technical requirements | Snyk Account Access' for this Account ID"
+    Description: "Snyk's AWS account ID that assumes a role in your account."
     Type: String
   QSS3BucketName:
     AllowedPattern: ^[0-9a-zA-Z]+([0-9a-zA-Z-]*[0-9a-zA-Z])*$
     ConstraintDescription:
-      Quick Start bucket name can include numbers, lowercase
-      letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen
-      (-).
+      Quick Start bucket name can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-).
     Default: aws-quickstart
     Description:
-      S3 bucket name for the Quick Start assets. This string can include
-      numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start
-      or end with a hyphen (-).
+      S3 bucket name for the Quick Start assets. This string can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-).
     Type: String
   QSS3BucketRegion:
     Default: 'us-east-1'
-    Description: The AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. When using your own bucket, you must specify this value.
+    Description: AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. When using your own bucket, you must specify this value.
     Type: String
   QSS3KeyPrefix:
     AllowedPattern: ^[0-9a-zA-Z-/.]*$
     ConstraintDescription:
-      Quick Start key prefix can include numbers, lowercase letters,
-      uppercase letters, hyphens (-), dots(.) and forward slash (/).
+      Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), periods (.), and forward slashes (/).
     Default: quickstart-snyk-security/
     Description:
-      S3 key prefix for the Quick Start assets. Quick Start key prefix
-      can include numbers, lowercase letters, uppercase letters, hyphens (-), dots(.) and
-      forward slash (/).
+      S3 key prefix for the Quick Start assets. The key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), periods (.), and forward slashes (/).
     Type: String
   ECRResourceARN:
-    Description: The ARN of the ECR resource(s). List multiple resource ARN's separated by a comma.
+    Description: ARN of the Amazon ECR resources. To list multiple ARNs, separate them with commas.
     Type: CommaDelimitedList
     Default: '*'
 Conditions:
