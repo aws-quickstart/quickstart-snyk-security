@@ -32,4 +32,11 @@ image::../docs/deployment_guide/images/snyk_service_account_settings.png[Snyk Se
 
 === Snyk account access
 
-For created roles to function, a Snyk account is required. Note that this deployment grants Snyk the ability to assume an IAM role in your account. To continue, use `198361731867` as the account ID for the *Snyk AWS account ID* parameter.
+For IAM roles to function, you must connect your Snyk account to your AWS Lambda account. Enter your Snyk ID for the *Snyk AWS account ID* parameter, as shown in <<snyk-aws-account-id>>.
+
+
+WARNING: This deployment enables Snyk to assume an IAM role in your account.
+
+[#snyk-aws-account-id]
+.Snyk account ID for AWS Lambda
+image::../docs/deployment_guide/images/snyk-aws-account-id.png[Snyk account ID for AWS Lambda,width=100%,height=100%]
