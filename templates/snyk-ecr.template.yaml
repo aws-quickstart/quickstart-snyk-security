@@ -3,13 +3,13 @@ AWSTemplateFormatVersion: '2010-09-09'
 Description: Snyk integration for Amazon Elastic Container Registry (ECR). (qs-1qqfgjgee)
 Outputs:
   AWSRegion:
-    Description: The AWS Region for your Snyk ECR intgration
+    Description: AWS Region for your Snyk integration.
     Value: !Sub '${AWS::Region}'
   SnykECRIntegrationRole:
-    Description: Snyk ECR Integration Role ARN
+    Description: Amazon Resource Name (ARN) for Snyk integration role.
     Value: !GetAtt 'SnykECRIntegrationRole.Arn'
   Version:
-    Description: Snyk ECR Integration Version
+    Description: Snyk integration version.
     Value: 1.0.2
 Metadata:
   QSLint:
@@ -32,16 +32,16 @@ Metadata:
       SnykAWSAccountNumber:
         default: Snyk AWS Account ID
       ECRResourceARN:
-        default: ECR Resource ARN
+        default: Amaozon ECR resource ARN
 Parameters:
   SnykExternalId:
-    Description: Locate the organization ID by logging in to https://app.snyk.io and navigating to Settings. To integrate with multiple organizations, separate each ID with a comma.
+    Description: "Enter your Snyk group ID. To locate your group ID, log in to https://app.snyk.io, and navigate to account settings. For multiple organizations, separate each ID with a comma."
     Type: CommaDelimitedList
   SnykAWSAccountNumber:
-    Description: "Snyk's AWS Account ID which assumes a role in your account. Please see the deployment guide 'Technical requirements | Snyk Account Access' for this Account ID"
+    Description: "Snyk's AWS account ID that assumes a role in your account."
     Type: String
   ECRResourceARN:
-    Description: The ARN of the ECR resource(s). List multiple resource ARN's separated by a comma.
+    Description: ARN of the Amazon ECR resources. To list multiple ARNs, separate them with commas.
     Type: CommaDelimitedList
     Default: '*'
 Resources:
