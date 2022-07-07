@@ -3,13 +3,13 @@ AWSTemplateFormatVersion: '2010-09-09'
 Description: Snyk integration on AWS. (qs-1qm9kh0j6)
 Outputs:
   AWSRegion:
-    Description: AWS Region for your Snyk ECR integration.
+    Description: AWS Region for your Snyk integration.
     Value: !Sub '${AWS::Region}'
   SnykECRIntegrationRole:
     Description: Amazon Resource Name (ARN) role for Snyk integration.
     Value: !GetAtt 'ECRIntegrationStack.Outputs.SnykECRIntegrationRole'
   SnykLambdaIntegrationRole:
-    Description: Snyk integration role ARN for AWS Lambda.
+    Description: Snyk integration ARN role for AWS Lambda.
     Value: !GetAtt 'LambdaIntegrationStack.Outputs.SnykLambdaIntegrationRole'
   Version:
     Description: Snyk integration version.
@@ -56,22 +56,22 @@ Parameters:
   QSS3BucketName:
     AllowedPattern: ^[0-9a-zA-Z]+([0-9a-zA-Z-]*[0-9a-zA-Z])*$
     ConstraintDescription:
-     The Quick Start bucket name can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-).
+     The S3 bucket name can include numbers, lowercase letters, uppercase letters, and hyphens (-), but it cannot start or end with a hyphen.
     Default: aws-quickstart
     Description:
-      S3 bucket name for your Quick Start assets. Keep the default name unless you are customizing the template. Changing the name updates code references to point to a new Quick Start location. This name can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-).
+      'Name of the S3 bucket for your copy of the deployment assets. Keep the default name unless you are customizing the template. Changing the name updates code references to point to a new location.'
     Type: String
   QSS3BucketRegion:
     Default: 'us-east-1'
-    Description: 'AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. Keep the default Region unless you are customizing the template. Changing this Region updates code references to point to a new Quick Start location. When using your own bucket, specify the Region.'
+    Description: 'AWS Region where the S3 bucket (QSS3BucketName) is hosted. Keep the default Region unless you are customizing the template. Changing the Region updates code references to point to a new location. When using your own bucket, specify the Region.'
     Type: String
   QSS3KeyPrefix:
     AllowedPattern: ^[0-9a-zA-Z-/.]*$
     ConstraintDescription:
-      Quick Start S3 key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slashes (/).
+      The S3 key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slashes (/). End the prefix with a forward slash.
     Default: quickstart-snyk-security/
     Description:
-      S3 key prefix to simulate a directory for your Quick Start assets. Keep the default prefix unless you are customizing the template. Changing this prefix updates code references to point to a new Quick Start location. This prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slashes (/).
+      'S3 key prefix that is used to simulate a folder for your copy of the deployment assets. Keep the default prefix unless you are customizing the template. Changing this prefix updates code references to point to a new location.'
     Type: String
 Conditions:
   UsingDefaultBucket: !Equals
