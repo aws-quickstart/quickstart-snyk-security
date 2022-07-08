@@ -9,7 +9,7 @@ Outputs:
     Description: Amazon Resource Name (ARN) role for your Snyk integration.
     Value: !GetAtt 'SnykECRIntegrationRole.Arn'
   Version:
-    Description: Snyk ECR integration version
+    Description: Snyk Amazon ECR integration version.
     Value: 1.0.3
   NewSnykOrg:
     Description: Specify your organization name.
@@ -32,7 +32,7 @@ Metadata:
           - ECRResourceARN
     ParameterLabels:
       SnykGroupId:
-        default: Snyk group ID to associate with your new organization
+        default: Snyk group ID to associate with your organization
       SnykAuthToken:
         default: Snyk API authentication token for the administrator (preferably a service-account token)
       SnykOrgPatternPrefix:
@@ -40,7 +40,7 @@ Metadata:
       SnykAWSAccountNumber:
         default: Snyk AWS account ID
       ECRResourceARN:
-        default: Amazon ECR ARN
+        default: ARN for Amazon ECR
 Parameters:
   SnykGroupId:
     Description: "Enter your Snyk group ID. To locate your group ID, log in to https://app.snyk.io, and navigate to account settings."
@@ -65,25 +65,24 @@ Parameters:
   QSS3BucketName:
     AllowedPattern: ^[0-9a-zA-Z]+([0-9a-zA-Z-]*[0-9a-zA-Z])*$
     ConstraintDescription:
-      Quick Start bucket name can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-).
+      'The S3 bucket name can include numbers, lowercase letters, uppercase letters, and hyphens (-), but it cannot start or end with a hyphen.'
     Default: aws-quickstart
-    Description:
-      S3 bucket name for the Quick Start assets. This string can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-).
+    Description: 'Name of the S3 bucket for your copy of the deployment assets. Keep the default name unless you are customizing the template. Changing the name updates code references to point to a new location.'
     Type: String
   QSS3BucketRegion:
     Default: 'us-east-1'
-    Description: AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. When using your own bucket, you must specify this value.
+    Description: 'AWS Region where the S3 bucket (QSS3BucketName) is hosted. Keep the default Region unless you are customizing the template. Changing the Region updates code references to point to a new location. When using your own bucket, specify the Region.'
     Type: String
   QSS3KeyPrefix:
     AllowedPattern: ^[0-9a-zA-Z-/.]*$
     ConstraintDescription:
-      Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), periods (.), and forward slashes (/).
+      'The S3 key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slashes (/). End the prefix with a forward slash.'
     Default: quickstart-snyk-security/
     Description:
-      S3 key prefix for the Quick Start assets. The key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), periods (.), and forward slashes (/).
+      'S3 key prefix that is used to simulate a folder for your copy of the deployment assets. Keep the default prefix unless you are customizing the template. Changing the prefix updates code references to point to a new location.'
     Type: String
   ECRResourceARN:
-    Description: ARN of the Amazon ECR resources. To list multiple ARNs, separate them with commas.
+    Description: ARN of the Amazon ECR resources. Use commas to separate multiple ARNs.
     Type: CommaDelimitedList
     Default: '*'
 Conditions:

@@ -6,7 +6,7 @@ Outputs:
     Description: Amazon Resource Name (ARN) role for Snyk AWS Lambda integration.
     Value: !GetAtt 'SnykLambdaIntegrationRole.Arn'
   Version:
-    Description: Snyk Lambda integration version.
+    Description: Snyk AWS Lambda integration version.
     Value: 1.0.2
 Metadata:
   QSLint:
@@ -38,7 +38,7 @@ Parameters:
     Description: "Snyk's AWS account ID that assumes a role in your account."
     Type: String
   LambdaResourceARN:
-    Description: ARN of the AWS Lambda resources.To list multiple ARNs, separate them with commas.
+    Description: ARN of the AWS Lambda resources. Use commas to separate multiple ARNs.
     Type: CommaDelimitedList
     Default: '*'
 Resources:
