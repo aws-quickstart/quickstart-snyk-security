@@ -39,4 +39,4 @@ WARNING: This deployment enables Snyk to assume an IAM role in your account.
 
 [#snyk-aws-account-id]
 .Snyk account ID for AWS Lambda
-image::../docs/deployment_guide/images/snyk-aws-account-id.png[Snyk account ID for AWS Lambda,width=100%,height=100%]
+image::../docs/deployment_guide/images/snyk-lambda-account-id.png[Snyk account ID for AWS Lambda,width=60%,height=60%]
