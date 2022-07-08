@@ -9,7 +9,7 @@ Outputs:
     Description: Amazon Resource Name (ARN) role for Snyk integration.
     Value: !GetAtt 'ECRIntegrationStack.Outputs.SnykECRIntegrationRole'
   SnykLambdaIntegrationRole:
-    Description: Snyk integration ARN role for AWS Lambda.
+    Description: ARN of the IAM role used to integrate Snyk with AWS Lambda resources.
     Value: !GetAtt 'LambdaIntegrationStack.Outputs.SnykLambdaIntegrationRole'
   Version:
     Description: Snyk integration version.

@@ -9,7 +9,7 @@ Outputs:
     Description: Amazon Resource Name (ARN) role for your Snyk integration.
     Value: !GetAtt 'SnykECRIntegrationRole.Arn'
   Version:
-    Description: Snyk integration version.
+    Description: Snyk Amazon ECR integration version.
     Value: 1.0.3
   NewSnykOrg:
     Description: Specify your organization name.
