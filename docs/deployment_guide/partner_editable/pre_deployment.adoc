@@ -5,11 +5,11 @@
 
 === Prepare your AWS account
 
-This Quick Start assumes that you already have Amazon ECR repositories or Lambda functions provisioned in your account.
+This Partner Solution assumes that you already have Amazon ECR repositories or Lambda functions provisioned in your account.
 
 === Prepare your {partner-company-name} account
 :xrefstyle: short
-Regardless of which Quick Start option you choose, log in to your https://app.snyk.io/[Snyk account^], as shown in <<settings1>>, and obtain your organization ID.
+Regardless of which Partner Solution option you choose, log in to your https://app.snyk.io/[Snyk account^], as shown in <<settings1>>, and obtain your organization ID.
 [#settings1]
 .Snyk Settings page
 image::../docs/deployment_guide/images/snyk_org_id_settings.png[Snyk Organization ID,width=100%,height=100%]
