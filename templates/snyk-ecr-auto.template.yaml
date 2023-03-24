@@ -1,19 +1,6 @@
 ---
 AWSTemplateFormatVersion: '2010-09-09'
 Description: Snyk integration for Amazon Elastic Container Registry (Amazon ECR). (qs-1sd1mkoa1)
-Outputs:
-  AWSRegion:
-    Description: AWS Region for your Snyk integration.
-    Value: !Sub '${AWS::Region}'
-  SnykECRIntegrationRole:
-    Description: Amazon Resource Name (ARN) role for your Snyk integration.
-    Value: !GetAtt 'SnykECRIntegrationRole.Arn'
-  Version:
-    Description: Snyk Amazon ECR integration version.
-    Value: 1.0.3
-  NewSnykOrg:
-    Description: Specify your organization name.
-    Value: !GetAtt CreateSnykIntegration.newOrgId
 Metadata:
   QSLint:
     Exclusions: [W9006]
@@ -169,3 +156,13 @@ Resources:
                     'ecr:GetLifecyclePolicy'
                   ]
                 Resource: !Ref ECRResourceARN
+Outputs:
+  AWSRegion:
+    Description: AWS Region for your Snyk integration.
+    Value: !Sub '${AWS::Region}'
+  SnykECRIntegrationRole:
+    Description: Amazon Resource Name (ARN) role for your Snyk integration.
+    Value: !GetAtt 'SnykECRIntegrationRole.Arn'
+  NewSnykOrg:
+    Description: Specify your organization name.
+    Value: !GetAtt CreateSnykIntegration.newOrgId

@@ -1,19 +1,6 @@
 ---
 AWSTemplateFormatVersion: '2010-09-09'
 Description: Snyk integration on AWS. (qs-1qm9kh0j6)
-Outputs:
-  AWSRegion:
-    Description: AWS Region for your Snyk integration.
-    Value: !Sub '${AWS::Region}'
-  SnykECRIntegrationRole:
-    Description: Amazon Resource Name (ARN) role for Snyk integration.
-    Value: !GetAtt 'ECRIntegrationStack.Outputs.SnykECRIntegrationRole'
-  SnykLambdaIntegrationRole:
-    Description: ARN of the IAM role used to integrate Snyk with AWS Lambda resources.
-    Value: !GetAtt 'LambdaIntegrationStack.Outputs.SnykLambdaIntegrationRole'
-  Version:
-    Description: Snyk integration version.
-    Value: 1.0.2
 Metadata:
   cfn-lint: { config: { ignore_checks: [ W9901 ] } }
   QSLint:
@@ -94,19 +81,10 @@ Resources:
             - UsingDefaultBucket
             - !Ref 'AWS::Region'
             - !Ref 'QSS3BucketRegion'
-  LambdaIntegrationStack:
-    Type: 'AWS::CloudFormation::Stack'
-    Properties:
-      Parameters:
-        SnykExternalId: !Join [",", !Ref 'SnykExternalId']
-        SnykAWSAccountNumber: !Ref 'SnykAWSAccountNumber'
-      TemplateURL: !Sub
-        - 'https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}templates/snyk-lambda.template.yaml'
-        - S3Bucket: !If
-            - UsingDefaultBucket
-            - !Sub 'aws-quickstart-${AWS::Region}'
-            - !Ref 'QSS3BucketName'
-          S3Region: !If
-            - UsingDefaultBucket
-            - !Ref 'AWS::Region'
-            - !Ref 'QSS3BucketRegion'
+Outputs:
+  AWSRegion:
+    Description: AWS Region for your Snyk integration.
+    Value: !Sub '${AWS::Region}'
+  SnykECRIntegrationRole:
+    Description: Amazon Resource Name (ARN) role for Snyk integration.
+    Value: !GetAtt 'ECRIntegrationStack.Outputs.SnykECRIntegrationRole'

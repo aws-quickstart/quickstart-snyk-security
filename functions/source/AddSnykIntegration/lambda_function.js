@@ -55,8 +55,8 @@ const createSnykOrg = () => {
 }
 
 
-// Create Snyk Integration
-// - Set up an Axios request to query the Snyk API and return a Promise.
+// Use the Snyk API to install the integration with Amazon Elastic Container Registry (ECR)
+// in the new organization that we created above.
 // - Accepts an orgId as a string.
 const createSnykIntegration = orgId => {
 
@@ -126,8 +126,6 @@ exports.handler = async (event, context) => {
           });
         break;
       case 'Update':
-        await cfnResponse.send(event, context, cfnResponse.SUCCESS);
-        break;
       case 'Delete':
         await cfnResponse.send(event, context, cfnResponse.SUCCESS);
         break;
