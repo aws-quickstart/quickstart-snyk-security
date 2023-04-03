@@ -1,21 +1,24 @@
----
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Snyk integration on AWS. (qs-1qm9kh0j6)
+Description: Snyk integration with AWS. (qs-1qm9kh0j6)
 Metadata:
-  cfn-lint: { config: { ignore_checks: [ W9901 ] } }
-  QSLint:
-    Exclusions: [W9006]
-  QuickStartDocumentation:
-    EntrypointName: "Snyk integration for AWS"
-    Order: "1"
   LICENSE: Apache License, Version 2.0
   AWS::CloudFormation::Interface:
     ParameterGroups:
       - Label:
-          default: Snyk
+          default: Snyk Container integration
         Parameters:
-          - SnykExternalId
-          - SnykAWSAccountNumber
+          - SnykContainerOrganizationId
+          - SnykContainerAWSAccountNumber
+          - ECRResourceARN
+      - Label:
+          default: Snyk Cloud integration
+        Parameters:
+          - SnykCloudOrganizationId
+          - SnykCloudAWSAccountNumber
+      - Label:
+          default: Common configuration
+        Parameters:
+          - RoleNameSuffix
       - Label:
           default: AWS Quick Start configuration
         Parameters:
@@ -23,10 +26,18 @@ Metadata:
           - QSS3BucketRegion
           - QSS3KeyPrefix
     ParameterLabels:
-      SnykExternalId:
-        default: Snyk organization ID(s)
-      SnykAWSAccountNumber:
-        default: Snyk AWS account ID
+      SnykContainerOrganizationId:
+        default: Snyk Container organization ID
+      SnykContainerAWSAccountNumber:
+        default: Snyk Container AWS account number
+      ECRResourceARN:
+        default: ARN(s) of ECR(s) for Snyk to scan
+      SnykCloudOrganizationId:
+        default: Snyk Cloud organization ID
+      SnykCloudAWSAccountNumber:
+        default: Snyk Cloud AWS account number
+      RoleNameSuffix:
+        default: Snyk IAM role name suffix
       QSS3BucketName:
         default: Quick Start S3 bucket name
       QSS3BucketRegion:
@@ -34,11 +45,24 @@ Metadata:
       QSS3KeyPrefix:
         default: Quick Start S3 key prefix
 Parameters:
-  SnykExternalId:
-    Description: "Locate the organization ID by logging in to https://app.snyk.io and navigating to Settings. To integrate with multiple organizations, separate each ID with a comma."
+  SnykContainerOrganizationId:
+    Description: "Locate the organization ID by logging in to https://app.snyk.io and navigating to Settings."
+    Type: String
+  SnykContainerAWSAccountNumber:
+    Description: "The Snyk Container AWS account number that assumes a role in your account."
+    Type: String
+  ECRResourceARN:
+    Description: "ARN(s) of the Amazon ECR resources. Use commas to separate multiple ARNs, or use '*' to allow Snyk to scan all ECRs in the account."
     Type: CommaDelimitedList
-  SnykAWSAccountNumber:
-    Description: "Snyk's AWS account ID that assumes a role in your account."
+    Default: '*'
+  SnykCloudOrganizationId:
+    Description: "Locate the organization ID by logging in to https://app.snyk.io and navigating to Settings."
+    Type: String
+  SnykCloudAWSAccountNumber:
+    Description: "The Snyk Cloud AWS account number that assumes a role in your account."
+    Type: String
+  RoleNameSuffix:
+    Description: "Unique suffix to append to the Snyk IAM roles."
     Type: String
   QSS3BucketName:
     AllowedPattern: ^[0-9a-zA-Z]+([0-9a-zA-Z-]*[0-9a-zA-Z])*$
@@ -65,14 +89,33 @@ Conditions:
     - !Ref QSS3BucketName
     - 'aws-quickstart'
 Resources:
-  ECRIntegrationStack:
+  SnykContainerIntegrationStack:
     Type: 'AWS::CloudFormation::Stack'
     Properties:
       Parameters:
-        SnykExternalId: !Join [",", !Ref 'SnykExternalId']
-        SnykAWSAccountNumber: !Ref 'SnykAWSAccountNumber'
+        SnykContainerOrganizationId: !Ref 'SnykContainerOrganizationId'
+        SnykContainerAWSAccountNumber: !Ref 'SnykContainerAWSAccountNumber'
+        ECRResourceARN: !Join [",", !Ref 'ECRResourceARN']
+        RoleNameSuffix: !Ref 'RoleNameSuffix'
       TemplateURL: !Sub
-        - 'https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}templates/snyk-ecr.template.yaml'
+        - 'https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}templates/snyk-container.template.yaml'
+        - S3Bucket: !If
+            - UsingDefaultBucket
+            - !Sub 'aws-quickstart-${AWS::Region}'
+            - !Ref 'QSS3BucketName'
+          S3Region: !If
+            - UsingDefaultBucket
+            - !Ref 'AWS::Region'
+            - !Ref 'QSS3BucketRegion'
+  SnykCloudIntegrationStack:
+    Type: 'AWS::CloudFormation::Stack'
+    Properties:
+      Parameters:
+        SnykCloudOrganizationId: !Ref 'SnykCloudOrganizationId'
+        SnykCloudAWSAccountNumber: !Ref 'SnykCloudAWSAccountNumber'
+        RoleNameSuffix: !Ref 'RoleNameSuffix'
+      TemplateURL: !Sub
+        - 'https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}templates/snyk-cloud.template.yaml'
         - S3Bucket: !If
             - UsingDefaultBucket
             - !Sub 'aws-quickstart-${AWS::Region}'
@@ -85,6 +128,9 @@ Outputs:
   AWSRegion:
     Description: AWS Region for your Snyk integration.
     Value: !Sub '${AWS::Region}'
-  SnykECRIntegrationRole:
-    Description: Amazon Resource Name (ARN) role for Snyk integration.
-    Value: !GetAtt 'ECRIntegrationStack.Outputs.SnykECRIntegrationRole'
+  SnykContainerRoleArn:
+    Description: IAM Role ARN for Snyk Container integration
+    Value: !GetAtt 'SnykContainerIntegrationStack.Outputs.SnykContainerRoleArn'
+  SnykCloudRoleArn:
+    Description: IAM Role ARN for Snyk Cloud integration
+    Value: !GetAtt 'SnykCloudIntegrationStack.Outputs.SnykCloudRoleArn'

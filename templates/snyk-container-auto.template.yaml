@@ -1,17 +1,11 @@
----
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Snyk integration for Amazon Elastic Container Registry (Amazon ECR). (qs-1sd1mkoa1)
+Description: Deploys the Snyk Container IAM Role and automatically creates a new Snyk Organization (qs-1sd1mkoa1)
 Metadata:
-  QSLint:
-    Exclusions: [W9006]
-  QuickStartDocumentation:
-    EntrypointName: "Snyk integration for Amazon ECR"
-    Order: "3"
   LICENSE: Apache License, Version 2.0
   AWS::CloudFormation::Interface:
     ParameterGroups:
       - Label:
-          default: Snyk
+          default: Snyk Container integration
         Parameters:
           - SnykGroupId
           - SnykAuthToken

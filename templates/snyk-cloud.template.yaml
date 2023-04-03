@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Description: Snyk Cloud IAM Role
+Description: Snyk Cloud IAM Role #TODO add tracking ID
 Metadata:
   LICENSE: Apache License, Version 2.0
   AWS::CloudFormation::Interface:
@@ -9,29 +9,29 @@ Metadata:
         Parameters:
           - SnykCloudOrganizationId
           - SnykCloudAWSAccountNumber
-          - SnykCloudRoleSuffix
+          - RoleNameSuffix
     ParameterLabels:
       SnykCloudOrganizationId:
         default: Snyk Cloud organization ID
       SnykCloudAWSAccountNumber:
         default: Snyk Cloud AWS account number
-      SnykCloudRoleSuffix:
-        default: Snyk Cloud role suffix
+      RoleNameSuffix:
+        default: Snyk Cloud role name suffix
 Parameters:
   SnykCloudOrganizationId:
     Description: "Locate the organization ID by logging in to https://app.snyk.io and navigating to Settings."
     Type: String
   SnykCloudAWSAccountNumber:
-    Description: "The Snyk AWS account number that assumes a role in your account."
+    Description: "The Snyk Cloud AWS account number that assumes a role in your account."
     Type: String
-  SnykCloudRoleSuffix:
-    Description: "Unique suffix to append to the Snyk Cloud IAM role."
+  RoleNameSuffix:
+    Description: "Unique suffix to append to the Snyk Cloud IAM role name."
     Type: String
 Resources:
   SnykCloudRole:
     Type: AWS::IAM::Role
     Properties:
-      RoleName: "snyk-cloud-role-${SnykCloudRoleSuffix}"
+      RoleName: !Sub "snyk-cloud-role-${RoleNameSuffix}"
       AssumeRolePolicyDocument:
         Version: "2012-10-17"
         Statement:
