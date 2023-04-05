@@ -1,27 +1,51 @@
 //Include any postdeployment steps here, such as steps necessary to test that the deployment was successful. If there are no postdeployment steps leave this file empty.
+:xrefstyle: short
 
-== Postdeployment steps
+== Post-deployment steps
 
-=== Snyk integration with Amazon ECR
-Deploying the Snyk security Partner Solution for Amazon Elastic Container Registry (Amazon ECR) creates
-an integration for your Snyk organization. After it deploys, you can
-add repositories for Snyk to scan by following these steps:
+=== Check CloudFormation Outputs
+
+In the AWS CloudFormation console, navigate to the *Outputs* tab on the root stack that you deployed, as shown in <<cfn-outputs>> below. You will copy and paste these values into the Snyk UI in subsequent steps.
+
+[#cfn-outputs]
+.CloudFormation Outputs tab
+image::../docs/deployment_guide/images/cfn-outputs.png[CloudFormation Outputs tab,width=100%,height=100%]
+
+=== Snyk Contaner integration
+
+==== Configure the integration in Snyk
+
+In the Snyk UI, navigate to your organization's *Integrations* page, then click on *ECR* in the *Container registries* section. Copy the values from the CloudFormation outputs into the Snyk UI as pictured in <<ecr-configuration>> below.
+
+NOTE: If you used the "auto" template to deploy the Snyk Container integration with Amazon ECR, these steps aren't required.
+
+[#ecr-configuration]
+.ECR configuration
+image::../docs/deployment_guide/images/ecr-configuration.png[ECR configuration,width=100%,height=100%]
+
+==== Import your container images into Snyk
+
+Congratulations! Your Snyk Container integration with Amazon ECR is installed and you can now import your container images into Snyk by following the steps below.
 
 . Log in to your Snyk account.
 . Navigate to *Projects*, choose *Add projects*, and then choose *Amazon ECR*.
 . Select either single or multiple images.
-. Choose *Add selected repositories*.
+. Choose *Add selected images*.
 
-For more information, refer to https://support.snyk.io/hc/en-us/articles/360003947077-Amazon-Elastic-Container-Registry-ECR-add-images-to-Snyk[Amazon ECR: add images to Snyk^].
+For more information, review the https://docs.snyk.io/scan-containers?utm_campaign=Snyk-Security-QS&utm_medium=Partner&utm_source=AWS[Snyk Container^] documentation.
 
-NOTE: Both integration options connect the deployed Amazon ECR instance to the Snyk organization provided in the Partner Solution parameters. Deployment may fail, however, if your chosen Snyk organization has an existing ECR integration or if the authentication token you provide in the parameters has insufficient permissions.
+=== Snyk Cloud integration
 
-=== Snyk integration with AWS Lambda
-. Log in to your Snyk account.
-. Navigate to *Projects*, choose *Add projects*, and then choose *AWS Lambda*.
-. Select the relevant functions.
-. Choose *Add selected functions*.
+==== Configure the integration in Snyk
 
-NOTE: Snyk supports integrating with AWS Lambda for Node.js, Ruby, and Java projects.
+In the Snyk UI, navigate to your organization's *Integrations* page, then click on *AWS* in the *Cloud platforms* section. Copy the values from the CloudFormation outputs to the <<aws-configuration>> user interface as pictured below.
 
-For more information, refer to https://support.snyk.io/hc/en-us/articles/360004002418-AWS-Lambda-integration[AWS Lambda integration^].
+[#aws-configuration]
+.AWS configuration
+image::../docs/deployment_guide/images/aws-configuration.png[ECR configuration,width=100%,height=100%]
+
+==== Scan your AWS Cloud environment with Snyk
+
+Congratulations! Your Snyk Cloud integration is installed and your AWS environment is being scanned by Snyk. In your Snyk organization, click *Cloud* to view the scan results, and be mindful that it may take several minutes for results to appear.
+
+For more information, review the https://docs.snyk.io/scan-cloud-deployment/snyk-cloud?utm_campaign=Snyk-Security-QS&utm_medium=Partner&utm_source=AWS[Snyk Cloud^] documentation.
