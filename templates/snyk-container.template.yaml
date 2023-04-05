@@ -9,15 +9,12 @@ Metadata:
         Parameters:
           - SnykContainerOrganizationId
           - SnykContainerAWSAccountNumber
-          - ECRResourceARN
           - RoleNameSuffix
     ParameterLabels:
       SnykContainerOrganizationId:
         default: Snyk Container organization ID
       SnykContainerAWSAccountNumber:
         default: Snyk Container AWS account number
-      ECRResourceARN:
-        default: ARN(s) of ECR(s) for Snyk to scan
       RoleNameSuffix:
         default: Snyk Container role name suffix
 Parameters:
@@ -27,10 +24,6 @@ Parameters:
   SnykContainerAWSAccountNumber:
     Description: "The Snyk Container AWS account number that assumes a role in your account."
     Type: String
-  ECRResourceARN:
-    Description: "ARN(s) of the Amazon ECR resources. Use commas to separate multiple ARNs, or use '*' to allow Snyk to scan all ECRs in the account."
-    Type: CommaDelimitedList
-    Default: '*'
   RoleNameSuffix:
     Description: "Unique suffix to append to the Snyk Container IAM role name."
     Type: String
@@ -69,7 +62,7 @@ Resources:
                     "ecr:GetRepositoryPolicy",
                     "ecr:GetLifecyclePolicy"
                   ]
-                Resource: !Ref ECRResourceARN       
+                Resource: "*"
 Outputs:
   AWSRegion:
     Description: AWS Region for Snyk Container integration

@@ -9,7 +9,6 @@ Metadata:
         Parameters:
           - SnykContainerOrganizationId
           - SnykContainerAWSAccountNumber
-          - ECRResourceARN
       - Label:
           default: Snyk Cloud integration
         Parameters:
@@ -30,8 +29,6 @@ Metadata:
         default: Snyk Container organization ID
       SnykContainerAWSAccountNumber:
         default: Snyk Container AWS account number
-      ECRResourceARN:
-        default: ARN(s) of ECR(s) for Snyk to scan
       SnykCloudOrganizationId:
         default: Snyk Cloud organization ID
       SnykCloudAWSAccountNumber:
@@ -51,10 +48,6 @@ Parameters:
   SnykContainerAWSAccountNumber:
     Description: "The Snyk Container AWS account number that assumes a role in your account."
     Type: String
-  ECRResourceARN:
-    Description: "ARN(s) of the Amazon ECR resources. Use commas to separate multiple ARNs, or use '*' to allow Snyk to scan all ECRs in the account."
-    Type: CommaDelimitedList
-    Default: '*'
   SnykCloudOrganizationId:
     Description: "Locate the organization ID by logging in to https://app.snyk.io and navigating to Settings."
     Type: String
@@ -95,7 +88,6 @@ Resources:
       Parameters:
         SnykContainerOrganizationId: !Ref 'SnykContainerOrganizationId'
         SnykContainerAWSAccountNumber: !Ref 'SnykContainerAWSAccountNumber'
-        ECRResourceARN: !Join [",", !Ref 'ECRResourceARN']
         RoleNameSuffix: !Ref 'RoleNameSuffix'
       TemplateURL: !Sub
         - 'https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}templates/snyk-container.template.yaml'

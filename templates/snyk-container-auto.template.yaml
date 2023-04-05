@@ -10,7 +10,6 @@ Metadata:
           - SnykGroupId
           - SnykAuthToken
           - SnykAWSAccountNumber
-          - ECRResourceARN
     ParameterLabels:
       SnykGroupId:
         default: Snyk group ID to associate with your organization
@@ -20,8 +19,6 @@ Metadata:
         default: Snyk organization name prefix
       SnykAWSAccountNumber:
         default: Snyk AWS account ID
-      ECRResourceARN:
-        default: ARN for Amazon ECR
 Parameters:
   SnykGroupId:
     Description: "Enter your Snyk group ID. To locate your group ID, log in to https://app.snyk.io, and navigate to account settings."
@@ -62,10 +59,6 @@ Parameters:
     Description:
       'S3 key prefix that is used to simulate a folder for your copy of the deployment assets. Keep the default prefix unless you are customizing the template. Changing the prefix updates code references to point to a new location.'
     Type: String
-  ECRResourceARN:
-    Description: ARN of the Amazon ECR resources. Use commas to separate multiple ARNs.
-    Type: CommaDelimitedList
-    Default: '*'
 Conditions:
   UsingDefaultBucket: !Equals
     - !Ref QSS3BucketName
@@ -149,7 +142,7 @@ Resources:
                     'ecr:GetRepositoryPolicy',
                     'ecr:GetLifecyclePolicy'
                   ]
-                Resource: !Ref ECRResourceARN
+                Resource: "*"
 Outputs:
   AWSRegion:
     Description: AWS Region for your Snyk integration.
