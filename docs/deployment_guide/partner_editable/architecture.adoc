@@ -1,6 +1,6 @@
 :xrefstyle: short
 
-Deploying this Partner Solution with default parameters creates the following resources in your AWS Cloud.
+The following resources may be created in your AWS Cloud depending on how you configure and deploy this Partner Solution.
 
 // Replace this example diagram with your own. Follow our wiki guidelines: https://w.amazon.com/bin/view/AWS_Quick_Starts/Process_for_PSAs/#HPrepareyourarchitecturediagram. Upload your source PowerPoint file to the GitHub {deployment name}/docs/images/ directory in this repo. 
 
