@@ -37,3 +37,6 @@ taskcat_outputs/
 
 # Node
 node_modules/
+
+# Snyk
+.dccache
