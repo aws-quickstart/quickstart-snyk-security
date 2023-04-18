@@ -1,12 +1,6 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: Snyk Container IAM Role (qs-1qqfgjgee)
 Metadata:
-  cfn-lint:
-    config:
-      ignore_checks:
-        - EIAMPolicyWildcardResource
-      ignore_reason:
-        - EIAMPolicyWildcardResource: "Wildcard resource is required"
   LICENSE: Apache License, Version 2.0
   AWS::CloudFormation::Interface:
     ParameterGroups:
@@ -36,6 +30,13 @@ Parameters:
 Resources:
   SnykContainerRole:
     Type: 'AWS::IAM::Role'
+    Metadata:
+      cfn-lint:
+        config:
+          ignore_checks:
+            - EIAMPolicyWildcardResource
+          ignore_reason:
+            - EIAMPolicyWildcardResource: "Wildcard resource is required"
     Properties:
       RoleName: !Sub "snyk-container-role-${RoleNameSuffix}"
       AssumeRolePolicyDocument:

@@ -30,6 +30,15 @@ Parameters:
 Resources:
   SnykCloudRole:
     Type: AWS::IAM::Role
+    Metadata:
+      cfn-lint:
+        config:
+          ignore_checks:
+            - EIAMPolicyWildcardResource
+            - EIAMPolicyActionWildcard
+          ignore_reason:
+            - EIAMPolicyWildcardResource: "Wildcard resource is required"
+            - EIAMPolicyActionWildcard: "Wildcard actions are required"
     Properties:
       RoleName: !Sub "snyk-cloud-role-${RoleNameSuffix}"
       AssumeRolePolicyDocument:

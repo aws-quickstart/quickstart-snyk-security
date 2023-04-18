@@ -1,12 +1,6 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: Deploys the Snyk Container IAM Role and automatically creates a new Snyk Organization (qs-1sd1mkoa1)
 Metadata:
-  cfn-lint:
-    config:
-      ignore_checks:
-        - EIAMPolicyWildcardResource
-      ignore_reason:
-        - EIAMPolicyWildcardResource: "Wildcard resource is required"
   LICENSE: Apache License, Version 2.0
   AWS::CloudFormation::Interface:
     ParameterGroups:
@@ -112,6 +106,13 @@ Resources:
       SnykOrgPatternPrefix: !Ref 'SnykOrgPatternPrefix'
   SnykECRIntegrationRole:
     Type: 'AWS::IAM::Role'
+    Metadata:
+      cfn-lint:
+        config:
+          ignore_checks:
+            - EIAMPolicyWildcardResource
+          ignore_reason:
+            - EIAMPolicyWildcardResource: "Wildcard resource is required"
     Properties:
       AssumeRolePolicyDocument:
         Version: '2012-10-17'
