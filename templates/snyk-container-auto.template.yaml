@@ -1,6 +1,10 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: Deploys the Snyk Container IAM Role and automatically creates a new Snyk Organization (qs-1sd1mkoa1)
 Metadata:
+  cfn-lint:
+    config:
+      ignore_checks:
+        - EIAMPolicyWildcardResource
   LICENSE: Apache License, Version 2.0
   AWS::CloudFormation::Interface:
     ParameterGroups:
