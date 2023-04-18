@@ -5,6 +5,8 @@ Metadata:
     config:
       ignore_checks:
         - EIAMPolicyWildcardResource
+      ignore_reason:
+        - EIAMPolicyWildcardResource: "Wildcard resource is required"
   LICENSE: Apache License, Version 2.0
   AWS::CloudFormation::Interface:
     ParameterGroups:
