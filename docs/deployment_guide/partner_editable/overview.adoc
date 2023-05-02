@@ -1,4 +1,4 @@
-This guide provides instructions for deploying {partner-product-short-name} integration resources on the AWS Cloud. If you are unfamiliar with AWS Partner Solutions, refer to the https://fwd.aws/rA69w?[AWS Partner Solution General Information Guide^].
+This guide provides instructions for deploying {partner-product-short-name} integration resources in the AWS Cloud. If you are unfamiliar with AWS Partner Solutions, refer to the https://fwd.aws/rA69w?[AWS Partner Solution General Information Guide^].
 
 // This deployment guide covers the steps necessary to deploy the Partner Solution. For more advanced information on the product, troubleshooting, or additional functionality, refer to the https://{quickstart-github-org}.github.io/{quickstart-project-name}/operational/index.html[Operational guide].
 
