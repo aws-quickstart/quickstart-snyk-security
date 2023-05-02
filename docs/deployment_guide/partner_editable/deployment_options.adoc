@@ -2,9 +2,9 @@
 
 This Partner Solution provides four deployment options:
 
-* https://TODO?[Deploy Snyk full integration^]. This option deploys both Snyk Container and Snyk Cloud integrations as a single deployment.
-* https://TODO?[Deploy Snyk Cloud integration^]. This option deploys only the Snyk Cloud integration.
-* https://TODO?[Deploy Snyk Container integration^]. This option deploys only the Snyk Container integration.
-* https://TODO?[Deploy Snyk Container integration with automatic installation^]. This option deploys the Snyk Container integration and creates a new Snyk organization that's preconfigured with an Amazon ECR integration.
+* https://fwd.aws/E4m9w?[Deploy Snyk full integration^]. This option deploys both Snyk Container and Snyk Cloud integrations as a single deployment.
+* https://fwd.aws/eAv97?[Deploy Snyk Cloud integration^]. This option deploys only the Snyk Cloud integration.
+* https://fwd.aws/A9jbM?[Deploy Snyk Container integration^]. This option deploys only the Snyk Container integration.
+* https://fwd.aws/eeAky?[Deploy Snyk Container integration with automatic installation^]. This option deploys the Snyk Container integration and creates a new Snyk organization that's preconfigured with an Amazon ECR integration.
 
 The Partner Solution provides separate AWS CloudFormation templates for each of these options.
