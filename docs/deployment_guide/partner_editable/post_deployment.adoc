@@ -40,7 +40,7 @@ For more information, refer to https://docs.snyk.io/scan-containers?utm_campaign
 
 . In the Snyk UI, navigate to your organization's *Integrations* page.
 . In the *Cloud platforms* section, choose *AWS*.
-. Copy the values from the CloudFormation outputs to the <<aws-configuration>> user interface, as shown in <<aws-configuration>>.
+. Copy the values from the CloudFormation outputs to the AWS configuration user interface, as shown in <<aws-configuration>>.
 
 [#aws-configuration]
 .AWS configuration
@@ -48,6 +48,6 @@ image::../docs/deployment_guide/images/aws-configuration.png[ECR configuration,w
 
 ==== Scan your AWS Cloud environment with Snyk
 
-Congratulations! Your Snyk Cloud integration is installed and your AWS environment is being scanned by Snyk. In your Snyk organization, click *Cloud* to view the scan results, and be mindful that it may take several minutes for results to appear.
+After you install Snyk Cloud integration and Snyk scans your AWS environment, it may take several minutes for scan results to appear. In your Snyk organization, choose *Cloud* to view the scan results. 
 
-For more information, review the https://docs.snyk.io/scan-cloud-deployment/snyk-cloud?utm_campaign=Snyk-Security-QS&utm_medium=Partner&utm_source=AWS[Snyk Cloud^] documentation.
+For more information, refer to https://docs.snyk.io/scan-cloud-deployment/snyk-cloud?utm_campaign=Snyk-Security-QS&utm_medium=Partner&utm_source=AWS[Snyk Cloud^].
