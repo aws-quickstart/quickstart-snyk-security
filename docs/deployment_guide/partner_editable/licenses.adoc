@@ -2,6 +2,6 @@
 
 The Snyk Container portion of this Partner Solution is available to Snyk customers of all pricing plans, including the free plan. If you're not a Snyk customer, you can create a free account on the https://app.snyk.io/login?utm_campaign=Snyk-Security-QS&utm_medium=Partner&utm_source=AWS[Snyk^] web page.
 
-Other portions of this Partner Solution such as Snyk Cloud integration and the "auto" template for ECR require a paid plan. For information about payment plans, refer to https://aws.amazon.com/marketplace/pp/prodview-nw2naibu6b2ks?sr=0-1&ref_=beagle&applicationId=AWSMPContessa[Snyk: Developer Security Platform (Team and Enterprise Tiers)^].
+Other portions of this Partner Solution, such as Snyk Cloud integration and the automated configuration template for Amazon ECR, require a paid plan. For information about payment plans, refer to https://aws.amazon.com/marketplace/pp/prodview-nw2naibu6b2ks?sr=0-1&ref_=beagle&applicationId=AWSMPContessa[Snyk: Developer Security Platform (Team and Enterprise Tiers)^].
 
 There is no cost to use this Partner Solution, but you will be billed for any AWS resources it deploys. For more information, refer to the https://fwd.aws/rA69w?[AWS Partner Solution General Information Guide^].
