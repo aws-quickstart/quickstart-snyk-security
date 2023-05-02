@@ -5,7 +5,7 @@
 
 === Check CloudFormation Outputs
 
-In the AWS CloudFormation console, navigate to the *Outputs* tab on the root stack that you deployed, as shown in <<cfn-outputs>> below. You will copy and paste these values into the Snyk UI in subsequent steps.
+In the AWS CloudFormation console, navigate to the *Outputs* tab on the root stack that you deployed, as shown in <<cfn-outputs>>. You will copy and paste these values into the Snyk UI in subsequent steps.
 
 [#cfn-outputs]
 .CloudFormation Outputs tab
@@ -15,7 +15,7 @@ image::../docs/deployment_guide/images/cfn-outputs.png[CloudFormation Outputs ta
 
 ==== Configure the integration in Snyk
 
-In the Snyk UI, navigate to your organization's *Integrations* page, then click on *ECR* in the *Container registries* section. Copy the values from the CloudFormation outputs into the Snyk UI as pictured in <<ecr-configuration>> below.
+In the Snyk UI, navigate to your organization's *Integrations* page, then click on *ECR* in the *Container registries* section. Copy the values from the CloudFormation outputs into the Snyk UI as shown in <<ecr-configuration>>.
 
 NOTE: If you used the "auto" template to deploy the Snyk Container integration with Amazon ECR, these steps aren't required.
 
@@ -25,20 +25,22 @@ image::../docs/deployment_guide/images/ecr-configuration.png[ECR configuration,w
 
 ==== Import your container images into Snyk
 
-Congratulations! Your Snyk Container integration with Amazon ECR is installed and you can now import your container images into Snyk by following the steps below.
+After installing Snyk Container integration with Amazon ECR, import your container images into Snyk.
 
 . Log in to your Snyk account.
 . Navigate to *Projects*, choose *Add projects*, and then choose *Amazon ECR*.
 . Select either single or multiple images.
 . Choose *Add selected images*.
 
-For more information, review the https://docs.snyk.io/scan-containers?utm_campaign=Snyk-Security-QS&utm_medium=Partner&utm_source=AWS[Snyk Container^] documentation.
+For more information, refer to https://docs.snyk.io/scan-containers?utm_campaign=Snyk-Security-QS&utm_medium=Partner&utm_source=AWS[Scan Containers^].
 
 === Snyk Cloud integration
 
 ==== Configure the integration in Snyk
 
-In the Snyk UI, navigate to your organization's *Integrations* page, then click on *AWS* in the *Cloud platforms* section. Copy the values from the CloudFormation outputs to the <<aws-configuration>> user interface as pictured below.
+. In the Snyk UI, navigate to your organization's *Integrations* page.
+. In the *Cloud platforms* section, choose *AWS*.
+. Copy the values from the CloudFormation outputs to the <<aws-configuration>> user interface, as shown in <<aws-configuration>>.
 
 [#aws-configuration]
 .AWS configuration
