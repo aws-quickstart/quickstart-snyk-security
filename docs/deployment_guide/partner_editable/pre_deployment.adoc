@@ -1,25 +1,33 @@
 //Include any predeployment steps here, such as signing up for a Marketplace AMI or making any changes to a Partner account. If there are none leave this file empty.
 
-== Predeployment steps
-
+== Pre-deployment steps
 
 === Prepare your AWS account
 
-This Partner Solution assumes that you already have Amazon ECR repositories or Lambda functions provisioned in your account.
+This Partner Solution assumes that you already have at least one Amazon Elastic Container Registry (ECR) as well as other AWS resources deployed in your account.
 
 === Prepare your {partner-company-name} account
 :xrefstyle: short
-Regardless of which Partner Solution option you choose, log in to your https://app.snyk.io/[Snyk account^], as shown in <<settings1>>, and obtain your organization ID.
+Log in to your https://app.snyk.io/login?utm_campaign=Snyk-Security-QS&utm_medium=Partner&utm_source=AWS[Snyk account^] and obtain your organization ID, as shown in <<settings1>>.
 [#settings1]
 .Snyk Settings page
 image::../docs/deployment_guide/images/snyk_org_id_settings.png[Snyk Organization ID,width=100%,height=100%]
 
-=== Automated configuration for Amazon ECR
-If you deploy Snyk security using the automated configuration option for Amazon ECR, obtain an API authentication token. The token automates the creation of organizations and ECR integrations within Snyk.
+=== Snyk AWS account numbers
 
-You may use either your personal account token, available through your Snyk account's settings page, as shown in <<settings2>>, or a service-account token. Service-account tokens can be generated through the **Settings** page for your organization within Snyk, as shown in <<settings3>>. For more information, refer to https://docs.snyk.io/features/integrations/managing-integrations/service-accounts[Service accounts^].
+For IAM roles to function, you must input values for the *Snyk Container AWS account number* and *Snyk Cloud AWS account number* parameters. These values are provided below.
 
-NOTE: An automated integration of Amazon ECR with Snyk requires a paid Snyk subscription.
+* Snyk Container AWS account number: `198361731867`
+* Snyk Cloud AWS account number: `370134896156`
+
+WARNING: This deployment enables Snyk to assume an IAM role in your AWS account.
+
+=== [Optional] Automatic installation for Amazon ECR
+To deploy the automatic installation option for Amazon ECR, obtain an API authentication token. AWS Lambda and the Snyk API are used to automate the creation of organizations and ECR integrations within Snyk.
+
+You may use either your personal account token, available through your Snyk account's settings page, as shown in <<settings2>>, or a service account token. Service account tokens can be generated through the **Settings** page for your organization within Snyk, as shown in <<settings3>>. For more information, refer to https://docs.snyk.io/snyk-admin/service-accounts?utm_campaign=Snyk-Security-QS&utm_medium=Partner&utm_source=AWS[Service accounts^].
+
+NOTE: Automatic installation requires a paid Snyk subscription to use the Snyk API.
 
 [#settings2]
 .Snyk account settings page
@@ -27,16 +35,4 @@ image::../docs/deployment_guide/images/snyk_api_token_settings.png[Snyk account 
 
 [#settings3]
 .Snyk organization service account settings
-image::../docs/deployment_guide/images/snyk_service_account_settings.png[Snyk Service Account settings,width=100%,height=100%]
-
-
-=== Snyk account access
-
-For IAM roles to function, you must connect your Snyk account to your AWS Lambda account. Enter your Snyk ID for the *Snyk AWS account ID* parameter, as shown in <<snyk-aws-account-id>>.
-
-
-WARNING: This deployment enables Snyk to assume an IAM role in your account.
-
-[#snyk-aws-account-id]
-.Snyk account ID for AWS Lambda
-image::../docs/deployment_guide/images/snyk-lambda-account-id.png[Snyk account ID for AWS Lambda,width=60%,height=60%]
+image::../docs/deployment_guide/images/snyk_service_account_settings.png[Snyk service account settings,width=100%,height=100%]
