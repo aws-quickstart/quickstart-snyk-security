@@ -15,9 +15,9 @@ image::../docs/deployment_guide/images/cfn-outputs.png[CloudFormation Outputs ta
 
 ==== Configure the integration in Snyk
 
-In the Snyk UI, navigate to your organization's *Integrations* page, then click on *ECR* in the *Container registries* section. Copy the values from the CloudFormation outputs into the Snyk UI as shown in <<ecr-configuration>>.
+NOTE: If you used the *Snyk Container integration with automatic installation* option to deploy Snyk Container integration with Amazon ECR, you can ignore this section.
 
-NOTE: If you used the "auto" template to deploy the Snyk Container integration with Amazon ECR, these steps aren't required.
+In the Snyk UI, navigate to your organization's *Integrations* page, then click on *ECR* in the *Container registries* section. Copy the values from the CloudFormation outputs into the Snyk UI as shown in <<ecr-configuration>>.
 
 [#ecr-configuration]
 .ECR configuration
