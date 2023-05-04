@@ -1,7 +1,7 @@
-This guide provides instructions for deploying {partner-product-short-name} on the AWS Cloud. If you are unfamiliar with AWS Quick Starts, refer to the https://fwd.aws/rA69w?[AWS Quick Start General Information Guide^].
+This guide provides instructions for deploying {partner-product-short-name} integration resources in the AWS Cloud. If you are unfamiliar with AWS Partner Solutions, refer to the https://fwd.aws/rA69w?[AWS Partner Solution General Information Guide^].
 
-// This deployment guide covers the steps necessary to deploy the Quick Start. For more advanced information on the product, troubleshooting, or additional functionality, refer to the https://{quickstart-github-org}.github.io/{quickstart-project-name}/operational/index.html[Operational guide].
+// This deployment guide covers the steps necessary to deploy the Partner Solution. For more advanced information on the product, troubleshooting, or additional functionality, refer to the https://{quickstart-github-org}.github.io/{quickstart-project-name}/operational/index.html[Operational guide].
 
-// For information on using this Quick Start for migrations, refer to the https://{quickstart-github-org}.github.io/{quickstart-project-name}/migration/index.html[Migration guide].
+// For information on using this Partner Solution for migrations, refer to the https://{quickstart-github-org}.github.io/{quickstart-project-name}/migration/index.html[Migration guide].
 
-This Quick Start is for developers, DevOps, security teams, and others who build, deploy, and maintain serverless applications or container images that use AWS Lambda and Amazon Elastic Container Registry (Amazon ECR).
+This Partner Solution is for developers, DevOps, security teams, and others who want to quickly integrate the https://snyk.io/product/container-vulnerability-management?utm_campaign=Snyk-Security-QS&utm_medium=Partner&utm_source=AWS[Snyk Container^] and https://snyk.io/product/snyk-cloud?utm_campaign=Snyk-Security-QS&utm_medium=Partner&utm_source=AWS[Snyk Cloud^] products with their AWS environment.

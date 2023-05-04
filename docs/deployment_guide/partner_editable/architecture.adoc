@@ -1,18 +1,16 @@
 :xrefstyle: short
 
-Deploying this Quick Start for a new virtual private cloud (VPC) with
-default parameters builds the following {partner-product-short-name} environment in the
-AWS Cloud.
+The following resources may be created in your AWS account depending on how you configure and deploy this Partner Solution.
 
-// Replace this example diagram with your own. Follow our wiki guidelines: https://w.amazon.com/bin/view/AWS_Quick_Starts/Process_for_PSAs/#HPrepareyourarchitecturediagram. Upload your source PowerPoint file to the GitHub {deployment name}/docs/images/ directory in this repo. 
+// Replace this example diagram with your own. Follow our wiki guidelines: https://w.amazon.com/bin/view/AWS_Quick_Starts/Process_for_PSAs/#HPrepareyourarchitecturediagram. Upload your source PowerPoint file to the GitHub {deployment name}/docs/images/ directory in this repo.
 
 [#architecture1]
-.Quick Start architecture for {partner-product-short-name} on AWS
+.Partner Solution architecture for {partner-product-short-name} on AWS
 image::../docs/deployment_guide/images/snyk-security-architecture-diagram.png[Architecture]
 
-As shown in <<architecture1>>, this Quick Start for {partner-product-short-name} Security provides the following deployment options:
+As shown in <<architecture1>>, this Partner Solution for {partner-product-short-name} provides the following deployment options:
 
-* AWS Lambda and Amazon ECR full integration with {partner-product-short-name}, including two cross-account AWS Identity and Access Management (IAM) roles for each product. 
-* AWS Lambda integration with {partner-product-short-name}, including one cross-account IAM role. 
-* Amazon ECR integration with {partner-product-short-name}, including one cross-account IAM role.
-* Amazon ECR integration with {partner-product-short-name} with automated configuration, including one cross-account IAM role.
+* Snyk Cloud and Snyk Container integration in a single deployment with Amazon Elastic Container Registry (Amazon ECR) and cross-account AWS Identity and Access Management (IAM) roles.
+* A Snyk Cloud-only integration option with cross-account IAM role for Snyk Container.
+* A Snyk Container-only integration option with Amazon ECR and cross-account IAM role for Snyk Container.
+* A Snyk Container-only integration option with Amazon ECR, a cross-account IAM role for Snyk Container, and AWS Lambda. This deployment option uses Lambda to create and configure a new organization in Snyk's system.

@@ -1,10 +1,10 @@
 // Edit this placeholder text to accurately describe your architecture.
 
-This Quick Start provides four deployment options:
+This Partner Solution provides four deployment options:
 
-* https://fwd.aws/E4m9w?[Deploy {partner-product-short-name} Security full integration^]. This option deploys both Amazon ECR and AWS Lambda integrations for {partner-product-short-name} as a single deployment.
-* https://fwd.aws/8rKEy?[Deploy {partner-product-short-name} Security integration with AWS Lambda^]. This option deploys only the AWS Lambda integration for {partner-product-short-name}.
-* https://fwd.aws/Nx5kQ?[Deploy {partner-product-short-name} Security integration with Amazon ECR^]. This option deploys only the Amazon ECR integration for {partner-product-short-name}.
-* https://fwd.aws/9P7vj?[Deploy {partner-product-short-name} Security integration with Amazon ECR and automated Snyk integration^]. This option deploys the Amazon ECR integration for {partner-product-short-name}. It creates a new organization within a Snyk account that's preconfigured with an Amazon ECR integration.
+* https://fwd.aws/E4m9w?[Deploy Snyk full integration^]. This option deploys both Snyk Container and Snyk Cloud integrations as a single deployment.
+* https://fwd.aws/eAv97?[Deploy Snyk Cloud integration^]. This option deploys only the Snyk Cloud integration.
+* https://fwd.aws/A9jbM?[Deploy Snyk Container integration^]. This option deploys only the Snyk Container integration.
+* https://fwd.aws/eeAky?[Deploy Snyk Container integration with automatic installation^]. This option deploys the Snyk Container integration and creates a new Snyk organization that's preconfigured with an Amazon ECR integration.
 
-The Quick Start provides separate templates for these options. It also lets you configure Classless Inter-Domain Routing (CIDR) blocks, instance types, and {partner-product-short-name} settings.
+The Partner Solution provides separate AWS CloudFormation templates for each of these options.

@@ -3,12 +3,10 @@
 :partner-product-name: Snyk Developer-First Security
 :partner-product-short-name: Snyk
 :partner-company-name: Snyk
-:doc-month: February
-:doc-year: 2022
-:partner-contributors: John Smith and Carwin Young, {partner-company-name}
-//:other-contributors: Akua Mansa, Trek10
-//:aws-contributors: Carwin Young, {partner-company-name}
+:doc-month: May
+:doc-year: 2023
+:partner-contributors: Jay Yeras, John Smith, Carwin Young, David Schott, {partner-company-name}
 :aws-ia-contributors: Dylan Owen, AWS Integration & Automation team
-:deployment_time: 15 minutes
+:deployment_time: 5 minutes
 :default_deployment_region: us-east-1
-//:private_repo:
+
