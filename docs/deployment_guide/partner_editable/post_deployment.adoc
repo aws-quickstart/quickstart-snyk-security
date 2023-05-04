@@ -3,7 +3,7 @@
 
 == Post-deployment steps
 
-=== Check CloudFormation Outputs
+=== Check CloudFormation outputs
 
 In the AWS CloudFormation console, navigate to the *Outputs* tab on the root stack that you deployed, as shown in <<cfn-outputs>>. You will copy and paste these values into the Snyk UI in subsequent steps.
 
@@ -48,6 +48,6 @@ image::../docs/deployment_guide/images/aws-configuration.png[ECR configuration,w
 
 ==== Scan your AWS Cloud environment with Snyk
 
-After you install Snyk Cloud integration and Snyk scans your AWS environment, it may take several minutes for scan results to appear. In your Snyk organization, choose *Cloud* to view the scan results. 
+After you install Snyk Cloud integration and Snyk scans your AWS environment, it may take several minutes for scan results to appear. In your Snyk organization, choose *Cloud* to view the scan results.
 
 For more information, refer to https://docs.snyk.io/scan-cloud-deployment/snyk-cloud?utm_campaign=Snyk-Security-QS&utm_medium=Partner&utm_source=AWS[Snyk Cloud^].

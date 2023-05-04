@@ -7,15 +7,11 @@
 This Partner Solution assumes that you already have at least one Amazon Elastic Container Registry (ECR) as well as other AWS resources deployed in your account.
 
 === Prepare your {partner-company-name} account
-:xrefstyle: short
-Log in to your https://app.snyk.io/login?utm_campaign=Snyk-Security-QS&utm_medium=Partner&utm_source=AWS[Snyk account^] and obtain your organization ID, as shown in <<settings1>>.
-[#settings1]
-.Snyk Settings page
-image::../docs/deployment_guide/images/snyk_org_id_settings.png[Snyk Organization ID,width=100%,height=100%]
+During deployment, you must enter your Snyk organization ID. To find your Snyk organization ID, refer to https://docs.snyk.io/scan-application-code/snyk-code/cli-for-snyk-code/before-you-start-set-the-organization-for-the-cli-tests/finding-the-snyk-id-and-internal-name-of-an-organization[Finding the Snyk ID and internal name of an Organization^].
 
 === Snyk AWS account numbers
 
-For IAM roles to function, you must input values for the *Snyk Container AWS account number* and *Snyk Cloud AWS account number* parameters. These values are provided below.
+During deployment, enter the folllowing values for the *Snyk Container AWS account number* and *Snyk Cloud AWS account number* parameters. These parameters are required to enable the deployed IAM roles to function.
 
 * Snyk Container AWS account number: `198361731867`
 * Snyk Cloud AWS account number: `370134896156`

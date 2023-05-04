@@ -3,7 +3,7 @@
 :partner-product-name: Snyk Developer-First Security
 :partner-product-short-name: Snyk
 :partner-company-name: Snyk
-:doc-month: April
+:doc-month: May
 :doc-year: 2023
 :partner-contributors: Jay Yeras, John Smith, Carwin Young, David Schott, {partner-company-name}
 :aws-ia-contributors: Dylan Owen, AWS Integration & Automation team
