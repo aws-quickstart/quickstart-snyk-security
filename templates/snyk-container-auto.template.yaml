@@ -1,35 +1,15 @@
----
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Snyk integration for Amazon Elastic Container Registry (Amazon ECR). (qs-1sd1mkoa1)
-Outputs:
-  AWSRegion:
-    Description: AWS Region for your Snyk integration.
-    Value: !Sub '${AWS::Region}'
-  SnykECRIntegrationRole:
-    Description: Amazon Resource Name (ARN) role for your Snyk integration.
-    Value: !GetAtt 'SnykECRIntegrationRole.Arn'
-  Version:
-    Description: Snyk Amazon ECR integration version.
-    Value: 1.0.3
-  NewSnykOrg:
-    Description: Specify your organization name.
-    Value: !GetAtt CreateSnykIntegration.newOrgId
+Description: Deploys the Snyk Container IAM Role and automatically creates a new Snyk Organization (qs-1sd1mkoa1)
 Metadata:
-  QSLint:
-    Exclusions: [W9006]
-  QuickStartDocumentation:
-    EntrypointName: "Snyk integration for Amazon ECR"
-    Order: "3"
   LICENSE: Apache License, Version 2.0
   AWS::CloudFormation::Interface:
     ParameterGroups:
       - Label:
-          default: Snyk
+          default: Snyk Container integration
         Parameters:
           - SnykGroupId
           - SnykAuthToken
           - SnykAWSAccountNumber
-          - ECRResourceARN
     ParameterLabels:
       SnykGroupId:
         default: Snyk group ID to associate with your organization
@@ -39,8 +19,6 @@ Metadata:
         default: Snyk organization name prefix
       SnykAWSAccountNumber:
         default: Snyk AWS account ID
-      ECRResourceARN:
-        default: ARN for Amazon ECR
 Parameters:
   SnykGroupId:
     Description: "Enter your Snyk group ID. To locate your group ID, log in to https://app.snyk.io, and navigate to account settings."
@@ -81,10 +59,6 @@ Parameters:
     Description:
       'S3 key prefix that is used to simulate a folder for your copy of the deployment assets. Keep the default prefix unless you are customizing the template. Changing the prefix updates code references to point to a new location.'
     Type: String
-  ECRResourceARN:
-    Description: ARN of the Amazon ECR resources. Use commas to separate multiple ARNs.
-    Type: CommaDelimitedList
-    Default: '*'
 Conditions:
   UsingDefaultBucket: !Equals
     - !Ref QSS3BucketName
@@ -132,6 +106,13 @@ Resources:
       SnykOrgPatternPrefix: !Ref 'SnykOrgPatternPrefix'
   SnykECRIntegrationRole:
     Type: 'AWS::IAM::Role'
+    Metadata:
+      cfn-lint:
+        config:
+          ignore_checks:
+            - EIAMPolicyWildcardResource
+          ignore_reason:
+            - EIAMPolicyWildcardResource: "Wildcard resource is required"
     Properties:
       AssumeRolePolicyDocument:
         Version: '2012-10-17'
@@ -168,4 +149,14 @@ Resources:
                     'ecr:GetRepositoryPolicy',
                     'ecr:GetLifecyclePolicy'
                   ]
-                Resource: !Ref ECRResourceARN
+                Resource: "*"
+Outputs:
+  AWSRegion:
+    Description: AWS Region for your Snyk integration.
+    Value: !Sub '${AWS::Region}'
+  SnykECRIntegrationRole:
+    Description: Amazon Resource Name (ARN) role for your Snyk integration.
+    Value: !GetAtt 'SnykECRIntegrationRole.Arn'
+  NewSnykOrg:
+    Description: Specify your organization name.
+    Value: !GetAtt CreateSnykIntegration.newOrgId

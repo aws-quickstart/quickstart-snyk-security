@@ -1,15 +1,20 @@
 project:
   name: quickstart-snyk-security
-  owner: partners@snyk.io
+  owner: partner-architects@snyk.io
   lambda_source_path: functions/source
   lambda_zip_path: functions/packages
   s3_regional_buckets: true
 tests:
-  full-no-auto:
+  container-and-cloud-integration:
     parameters:
       QSS3BucketName: $[taskcat_autobucket]
       QSS3BucketRegion: $[taskcat_current_region]
-      SnykExternalId: abcd1234-abcd-1234-abcd-1234abcd1234
+      SnykContainerOrganizationId: abcd1234-abcd-1234-abcd-1234abcd1234
+      SnykContainerAWSAccountNumber: '198361731867'
+      ECRResourceARN: '*'
+      SnykCloudOrganizationId: abcd1234-abcd-1234-abcd-1234abcd1234
+      SnykCloudAWSAccountNumber: '370134896156'
+      RoleNameSuffix: taskcat
     regions:
       - us-east-1
     template: templates/snyk-full.template.yaml

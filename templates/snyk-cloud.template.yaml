@@ -1,0 +1,148 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Snyk Cloud IAM Role (qs-1u40l99qg)
+Metadata:
+  LICENSE: Apache License, Version 2.0
+  AWS::CloudFormation::Interface:
+    ParameterGroups:
+      - Label:
+          default: Snyk Cloud integration
+        Parameters:
+          - SnykCloudOrganizationId
+          - SnykCloudAWSAccountNumber
+          - RoleNameSuffix
+    ParameterLabels:
+      SnykCloudOrganizationId:
+        default: Snyk Cloud organization ID
+      SnykCloudAWSAccountNumber:
+        default: Snyk Cloud AWS account number
+      RoleNameSuffix:
+        default: Snyk Cloud role name suffix
+Parameters:
+  SnykCloudOrganizationId:
+    Description: "Locate the organization ID by logging in to https://app.snyk.io and navigating to Settings."
+    Type: String
+  SnykCloudAWSAccountNumber:
+    Description: "The Snyk Cloud AWS account number that assumes a role in your account."
+    Type: String
+  RoleNameSuffix:
+    Description: "Unique suffix to append to the Snyk Cloud IAM role name."
+    Type: String
+Resources:
+  SnykCloudRole:
+    Type: AWS::IAM::Role
+    Metadata:
+      cfn-lint:
+        config:
+          ignore_checks:
+            - EIAMPolicyWildcardResource
+            - EIAMPolicyActionWildcard
+          ignore_reason:
+            - EIAMPolicyWildcardResource: "Wildcard resource is required"
+            - EIAMPolicyActionWildcard: "Wildcard actions are required"
+    Properties:
+      RoleName: !Sub "snyk-cloud-role-${RoleNameSuffix}"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Principal:
+              AWS: !Sub "arn:${AWS::Partition}:iam::${SnykCloudAWSAccountNumber}:role/snyk-generate-credentials"
+            Action: "sts:AssumeRole"
+            Condition:
+              StringEquals:
+                "sts:ExternalId": 
+                  Fn::Base64: 
+                    !Ref 'SnykCloudOrganizationId'
+      Policies:
+        - PolicyName: SnykCloudIAMRolePolicy
+          PolicyDocument: {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Sid": "0",
+                "Effect": "Allow",
+                "Resource": "*",
+                "Action": [
+                  "account:GetAlternateContact",
+                  "acm-pca:GetCertificateAuthorityCertificate",
+                  "acm-pca:GetCertificateAuthorityCsr",
+                  "acm-pca:ListTags",
+                  "apigateway:GET",
+                  "athena:GetNamedQuery",
+                  "athena:GetQueryExecution",
+                  "athena:GetQueryResults",
+                  "cloudhsm2:DescribeClusters",
+                  "cloudwatch:GetDashboard",
+                  "cloudwatch:ListDashboards",
+                  "cognito-idp:GetGroup",
+                  "cognito-idp:GetUserPoolMfaConfig",
+                  "ds:DescribeConditionalForwarders",
+                  "ds:ListTagsForResource",
+                  "elasticfilesystem:DescribeLifecycleConfiguration",
+                  "elasticfilesystem:DescribeTags",
+                  "es:GetCompatibleElasticsearchVersions",
+                  "es:GetUpgradeStatus",
+                  "glacier:GetVaultNotifications",
+                  "glacier:ListTagsForVault",
+                  "glue:GetClassifier",
+                  "glue:GetConnection",
+                  "glue:GetConnections",
+                  "glue:GetCrawler",
+                  "glue:GetDatabase",
+                  "glue:GetJob",
+                  "glue:GetSecurityConfiguration",
+                  "glue:GetSecurityConfigurations",
+                  "glue:GetTable",
+                  "glue:GetTables",
+                  "glue:GetTags",
+                  "glue:GetTrigger",
+                  "glue:GetWorkflow",
+                  "glue:ListCrawlers",
+                  "glue:ListJobs",
+                  "glue:ListTriggers",
+                  "glue:ListWorkflows",
+                  "guardduty:DescribeOrganizationConfiguration",
+                  "lambda:GetAlias",
+                  "lambda:GetEventSourceMapping",
+                  "lambda:GetFunction",
+                  "lambda:GetFunctionCodeSigningConfig",
+                  "lambda:GetLayerVersion",
+                  "lambda:GetProvisionedConcurrencyConfig",
+                  "macie:ListMemberAccounts",
+                  "macie:ListS3Resources",
+                  "mediastore:DescribeContainer",
+                  "mediastore:ListTagsForResource",
+                  "ram:GetResourceShareAssociations",
+                  "ram:GetResourceShareInvitations",
+                  "ram:GetResourceShares",
+                  "sns:GetPlatformApplicationAttributes",
+                  "sns:GetSMSAttributes",
+                  "sns:GetSubscriptionAttributes",
+                  "ssm:GetDocument",
+                  "ssm:GetMaintenanceWindow",
+                  "ssm:GetMaintenanceWindowTask",
+                  "ssm:GetParameter",
+                  "ssm:GetParameters",
+                  "ssm:GetPatchBaseline",
+                  "states:DescribeStateMachine",
+                  "states:ListTagsForResource",
+                  "waf-regional:Get*",
+                  "waf-regional:List*",
+                  "waf:Get*",
+                  "waf:List*",
+                  "wafv2:Get*",
+                  "wafv2:List*"
+                ]
+              }
+            ]
+          }
+      ManagedPolicyArns: [
+        !Sub "arn:${AWS::Partition}:iam::${AWS::Partition}:policy/SecurityAudit"
+      ]
+      
+Outputs:
+  SnykCloudRoleArn:
+    Description: IAM Role ARN for Snyk Cloud integration
+    Value: !GetAtt SnykCloudRole.Arn
+    Export:
+      Name: !Join [ ":", [ !Ref "AWS::StackName", SnykCloudRoleArn ] ]

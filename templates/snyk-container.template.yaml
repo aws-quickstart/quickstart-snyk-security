@@ -1,0 +1,79 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Snyk Container IAM Role (qs-1qqfgjgee)
+Metadata:
+  LICENSE: Apache License, Version 2.0
+  AWS::CloudFormation::Interface:
+    ParameterGroups:
+      - Label:
+          default: Snyk Container integration
+        Parameters:
+          - SnykContainerOrganizationId
+          - SnykContainerAWSAccountNumber
+          - RoleNameSuffix
+    ParameterLabels:
+      SnykContainerOrganizationId:
+        default: Snyk Container organization ID
+      SnykContainerAWSAccountNumber:
+        default: Snyk Container AWS account number
+      RoleNameSuffix:
+        default: Snyk Container role name suffix
+Parameters:
+  SnykContainerOrganizationId:
+    Description: "Locate the organization ID by logging in to https://app.snyk.io and navigating to Settings."
+    Type: String
+  SnykContainerAWSAccountNumber:
+    Description: "The Snyk Container AWS account number that assumes a role in your account."
+    Type: String
+  RoleNameSuffix:
+    Description: "Unique suffix to append to the Snyk Container IAM role name."
+    Type: String
+Resources:
+  SnykContainerRole:
+    Type: 'AWS::IAM::Role'
+    Metadata:
+      cfn-lint:
+        config:
+          ignore_checks:
+            - EIAMPolicyWildcardResource
+          ignore_reason:
+            - EIAMPolicyWildcardResource: "Wildcard resource is required"
+    Properties:
+      RoleName: !Sub "snyk-container-role-${RoleNameSuffix}"
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              AWS: !Ref SnykContainerAWSAccountNumber
+            Action: sts:AssumeRole
+            Condition:
+              StringEquals:
+                'sts:ExternalId': !Ref 'SnykContainerOrganizationId'
+      Policies:
+        - PolicyName: SnykContainerIAMRolePolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  [
+                    "ecr:GetLifecyclePolicyPreview",
+                    "ecr:GetDownloadUrlForLayer",
+                    "ecr:BatchGetImage",
+                    "ecr:DescribeImages",
+                    "ecr:GetAuthorizationToken",
+                    "ecr:DescribeRepositories",
+                    "ecr:ListTagsForResource",
+                    "ecr:ListImages",
+                    "ecr:BatchCheckLayerAvailability",
+                    "ecr:GetRepositoryPolicy",
+                    "ecr:GetLifecyclePolicy"
+                  ]
+                Resource: "*"
+Outputs:
+  AWSRegion:
+    Description: AWS Region for Snyk Container integration
+    Value: !Sub '${AWS::Region}'
+  SnykContainerRoleArn:
+    Description: IAM Role ARN for Snyk Container integration
+    Value: !GetAtt 'SnykContainerRole.Arn'
